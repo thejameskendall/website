@@ -1,0 +1,88 @@
+/*
+  Design tokens — James Kendall Design System (poster system).
+  Source of truth: 1. Projects/Design System/James Kendall Design System/tokens/
+  Consumed per DESIGN-SPEC.md v2. Change the DS first, this file second.
+*/
+
+:root {
+  /* Colour — paper & ink */
+  --paper-1: #f0ede3;
+  --paper-2: #e7e3d6;
+  --paper-3: #dcd7c8;
+  --ink-1: #161412;
+  --ink-2: #3a3733;
+  --ink-3: #6f6a61;
+  --ink-4: #a39d90;
+  --signal-red: #d92818;
+  --signal-red-deep: #b01f12;
+  --ink-on-dark: #eae6da;
+
+  /* Semantic */
+  --surface-page: var(--paper-1);
+  --surface-card: var(--paper-1);
+  --surface-inverse: var(--ink-1);
+  --text-display: var(--ink-1);
+  --text-body: var(--ink-2);
+  --text-caption: var(--ink-3);
+  --text-accent: var(--signal-red);
+  --text-on-inverse: var(--ink-on-dark);
+  --border-hairline: var(--ink-4);
+  --border-strong: var(--ink-1);
+  --link-color: var(--ink-1);
+  --link-hover: var(--signal-red);
+  --focus-ring: var(--signal-red);
+
+  /* Faces — self-hosted @fontsource substitutes (see DS readme) */
+  --font-display: 'Anton', 'Arial Narrow', sans-serif;
+  --font-grotesque: 'Archivo Variable', 'Helvetica Neue', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-serif: 'Tinos', 'Times New Roman', serif;
+  --font-scrawl: 'Permanent Marker', cursive;
+
+  /* Type scale — poster-sized */
+  --type-display-1: clamp(64px, 14vw, 220px);
+  --type-display-2: clamp(40px, 7vw, 96px);
+  --type-title: 32px;
+  --type-subtitle: 21px;
+  --type-body: 16px;
+  --type-caption: 13px;
+  --type-micro: 10px;
+
+  --weight-display: 400;
+  --weight-bold: 700;
+  --weight-medium: 500;
+  --weight-regular: 400;
+
+  --leading-display: 0.88;
+  --leading-title: 1.05;
+  --leading-body: 1.5;
+  --tracking-display: -0.01em;
+  --tracking-micro: 0.14em;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 40px;
+  --space-7: 64px;
+  --space-8: 104px;
+  --page-margin: clamp(20px, 4vw, 56px);
+
+  /* Corners, borders, shadow */
+  --radius-0: 0px;
+  --radius-sticker: 3px;
+  --radius-pill: 999px;
+  --border-width-hairline: 1px;
+  --border-width-strong: 2px;
+  --shadow-none: none;
+  --shadow-paper: 1px 2px 0 rgba(22, 20, 18, 0.35);
+
+  /* Motion — abrupt and editorial */
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+
+  color-scheme: light;
+}

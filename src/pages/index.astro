@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MetaLine from '../components/ds/MetaLine.astro';
+import Sticker from '../components/ds/Sticker.astro';
+import PosterCard from '../components/ds/PosterCard.astro';
+import { getCollection } from 'astro:content';
+import { SHOW_DRAFTS } from '../lib/flags';
+import { placeholderImage } from '../lib/placeholders';
+
+const projects = (await getCollection('projects', ({ data }) => SHOW_DRAFTS || !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const count = `[${String(projects.length).padStart(2, '0')}]`;
+---
+
+<BaseLayout title="Home">
+  <!-- Poster hero — DS website kit pattern -->
+  <section class="hero page-pad">
+    <div class="hero-canvas">
+      <img
+        class="hero-image"
+        src="/images/woty/woty-02-gold-headpiece.png"
+        alt="Gold headpiece, from Wasted On The Young"
+      />
+      <h1 class="hero-title">
+        Collective<br /><span class="hero-indent">Joy,</span><br />Documented
+      </h1>
+      <p class="hero-credentials meta-micro">
+        Photographer — Writer<br />Music · Youth Culture · Age
+      </p>
+      <div class="hero-sticker">
+        <Sticker label="NEW">Wasted On The Young</Sticker>
+      </div>
+    </div>
+    <p class="hero-standfirst">
+      Photography as a means of connection, and a suggestion of how you might
+      connect to each other, and the world. Published by i-D, NME, the BBC and
+      many others.
+    </p>
+  </section>
+
+  <div class="page-pad">
+    <MetaLine border="both" items={['SELECTED PROJECTS', '2011—2026', count, 'PHOTOGRAPHY + TEXT']} />
+  </div>
+
+  <!-- Project grid -->
+  <section class="grid page-pad">
+    {projects.map((p) => (
+      <PosterCard
+        href={`/projects/${p.id}`}
+        title={p.data.title}
+        image={p.data.coverImage ?? placeholderImage(p.id)}
+        meta={[p.data.years, ...(p.data.draft ? ['DRAFT'] : [])]}
+      />
+    ))}
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    padding-top: var(--space-6);
+    padding-bottom: 56px;
+    overflow: hidden;
+  }
+
+  .hero-canvas {
+    position: relative;
+  }
+
+  .hero-image {
+    position: absolute;
+    left: 50%;
+    top: 12px;
+    transform: translateX(-50%);
+    width: min(420px, 38vw);
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  .hero-title {
+    position: relative;
+    font-size: clamp(64px, 12.5vw, 190px);
+    mix-blend-mode: multiply;
+  }
+
+  .hero-indent {
+    margin-left: 0.8em;
+  }
+
+  .hero-credentials {
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: right;
+  }
+
+  .hero-sticker {
+    position: absolute;
+    right: 8%;
+    bottom: -8px;
+  }
+
+  .hero-standfirst {
+    max-width: 44ch;
+    margin-top: 36px;
+    font-size: 17px;
+    color: var(--text-body);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding-top: var(--space-5);
+    padding-bottom: 56px;
+  }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
+    .hero-image { position: relative; left: 0; top: 0; transform: none; width: 100%; margin-bottom: var(--space-4); }
+    .hero-credentials { position: static; text-align: left; margin-top: var(--space-3); }
+    .hero-sticker { position: static; display: inline-block; margin-top: var(--space-4); }
+  }
+</style>

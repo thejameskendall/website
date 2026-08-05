@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Tag from '../../components/ds/Tag.astro';
+import Sticker from '../../components/ds/Sticker.astro';
+import MetaLine from '../../components/ds/MetaLine.astro';
+import ButtonLink from '../../components/ds/ButtonLink.astro';
+import RelatedStrip from '../../components/RelatedStrip.astro';
+import { getCollection, render } from 'astro:content';
+import { SHOW_DRAFTS } from '../../lib/flags';
+import { placeholderImage } from '../../lib/placeholders';
+
+export async function getStaticPaths() {
+  const { SHOW_DRAFTS } = await import('../../lib/flags');
+  const projects = await getCollection('projects', ({ data }) => SHOW_DRAFTS || !data.draft);
+  return projects.map((p) => ({
+    params: { slug: p.id },
+    props: { project: p },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const number = `PROJECT ${String(project.data.order).padStart(2, '0')}`;
+const ongoing = /[—–-]\s*$/.test(project.data.years);
+const image = project.data.coverImage ?? placeholderImage(project.id);
+const usingPlaceholder = !project.data.coverImage;
+
+// Related writing from frontmatter
+const allWriting = await getCollection('writing', ({ data }) => SHOW_DRAFTS || !data.draft);
+const relatedWriting = (project.data.relatedWriting ?? [])
+  .map((slug) => allWriting.find((w) => w.id === slug))
+  .filter(Boolean);
+
+// Related strip: same-collection siblings, v1 rule
+const siblings = (await getCollection('projects', ({ data }) => SHOW_DRAFTS || !data.draft))
+  .filter((p) => p.id !== project.id)
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((p) => ({
+    href: `/projects/${p.id}`,
+    title: p.data.title,
+    eyebrow: 'Projects',
+    meta: p.data.years,
+  }));
+
+const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURIComponent(`Prints — ${project.data.title}`)}`;
+---
+
+<BaseLayout title={project.data.title} description={project.data.summary}>
+  <!-- Title block — DS website kit Project pattern -->
+  <section class="title-block page-pad">
+    <div class="tag-row">
+      <Tag>{number}</Tag>
+      {ongoing && <Tag tone="red">ONGOING</Tag>}
+      <Tag tone="faded">{project.data.years}</Tag>
+      {project.data.draft && <Tag tone="faded">DRAFT</Tag>}
+    </div>
+    <h1>{project.data.title}</h1>
+    <p class="standfirst">{project.data.summary}</p>
+  </section>
+
+  <!-- Image spread -->
+  {image && (
+    <section class="spread page-pad">
+      <figure class="plate">
+        <img src={image} alt={`From ${project.data.title}`} />
+        {usingPlaceholder && (
+          <div class="plate-sticker">
+            <Sticker rotate={2} label="TEMP">PLACEHOLDER</Sticker>
+          </div>
+        )}
+        <figcaption class="caption">
+          {project.data.title}, {project.data.years}.
+        </figcaption>
+      </figure>
+      <div class="side">
+        <MetaLine border="both" items={['PRINTS', 'ENQUIRE']} />
+        {relatedWriting.length > 0 && (
+          <MetaLine border="bottom" items={['WRITING', `[${String(relatedWriting.length).padStart(2, '0')}]`]} />
+        )}
+        <div class="actions">
+          <ButtonLink href={enquire} variant="primary">Enquire about prints</ButtonLink>
+          <ButtonLink href="/projects" variant="ghost">All projects →</ButtonLink>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Project text -->
+  <section class="page-pad">
+    <div class="prose">
+      <Content />
+    </div>
+  </section>
+
+  {relatedWriting.length > 0 && (
+    <section class="page-pad writing-block">
+      <MetaLine border="both" items={['RELATED WRITING']} />
+      <ul class="writing-list">
+        {relatedWriting.map((w) => (
+          <li>
+            <a href={w!.data.externalUrl ?? `/writing/${w!.id}`}>
+              <span class="meta-micro">{w!.data.publication ?? 'ESSAY'}</span>
+              <span class="writing-title">{w!.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <RelatedStrip items={siblings} heading="More projects" />
+</BaseLayout>
+
+<style>
+  .title-block {
+    padding-top: 36px;
+    position: relative;
+  }
+
+  .tag-row {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: clamp(56px, 10.5vw, 160px);
+  }
+
+  .standfirst {
+    max-width: 52ch;
+    font-size: 17px;
+    margin-top: var(--space-5);
+  }
+
+  .spread {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 28px;
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-6);
+    align-items: start;
+  }
+
+  .plate {
+    position: relative;
+    margin: 0;
+  }
+
+  .plate img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .plate-sticker {
+    position: absolute;
+    right: -8px;
+    top: 18px;
+  }
+
+  .side :global(.metaline + .metaline) {
+    margin-top: 0;
+  }
+
+  .actions {
+    margin-top: var(--space-5);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .writing-block {
+    margin-top: var(--space-7);
+  }
+
+  .writing-list {
+    list-style: none;
+    margin-top: var(--space-4);
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .writing-list a {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .writing-title {
+    font-family: var(--font-grotesque);
+    font-weight: var(--weight-bold);
+    font-size: var(--type-subtitle);
+    color: var(--ink-1);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .writing-list a:hover .writing-title {
+    color: var(--signal-red);
+  }
+
+  @media (max-width: 900px) {
+    .spread { grid-template-columns: 1fr; }
+  }
+</style>

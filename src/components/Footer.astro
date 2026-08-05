@@ -1,0 +1,39 @@
+---
+/* MetaLine footer per DS website kit. */
+import MetaLine from './ds/MetaLine.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer page-pad">
+  <MetaLine
+    border="top"
+    items={['JAMES KENDALL', 'PHOTOGRAPHER — WRITER', 'BRIGHTON [UK]', `©${year}`]}
+  />
+  <p class="meta-micro contact-row">
+    <a href="mailto:jameswilliamkendall@gmail.com">jameswilliamkendall@gmail.com</a>
+    <a href="https://instagram.com/thejameskendall" rel="me noopener">INSTAGRAM ↗</a>
+  </p>
+</footer>
+
+<style>
+  .site-footer {
+    padding-top: var(--space-5);
+    padding-bottom: 20px;
+    margin-top: var(--space-8);
+  }
+
+  .contact-row {
+    display: flex;
+    gap: var(--space-5);
+    margin-top: var(--space-2);
+  }
+
+  .contact-row a {
+    color: var(--ink-3);
+  }
+
+  .contact-row a:hover {
+    color: var(--signal-red);
+  }
+</style>

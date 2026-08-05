@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Tag from '../components/ds/Tag.astro';
+import MetaLine from '../components/ds/MetaLine.astro';
+import ButtonLink from '../components/ds/ButtonLink.astro';
+---
+
+<BaseLayout title="About" description="James Kendall is a photographer and writer based in Brighton, UK.">
+  <section class="about page-pad">
+    <div class="bio">
+      <h1 class="display-2">Thirty years<br />in the crowd</h1>
+
+      <div class="prose">
+        <p>
+          James Kendall is a photographer and writer whose arts practice is in service to the
+          intersection of music, youth culture and age, with a focus on themes of connection and
+          collective joy. He has been writing about popular culture since 1992 and for the past 12
+          years has been an editorial photographer, published by i-D, NME, the BBC and many others.
+        </p>
+        <p>
+          His arts practice is exemplified by his most recent project Wasted On The Young, an
+          investigation of the changing nature of middle age. He uses photography as a means of
+          connection and to suggest ways that others can connect to each other and the world. He has
+          had a range of exhibitions, both solo and group shows. His project Best Before was
+          featured in The Guardian amongst other media outlets and was shortlisted for the Danny
+          Wilson Award at the Brighton Photo Fringe.
+        </p>
+        <p>
+          Now into his third decade of writing about music, he has run his own magazine and
+          travelled the world as a freelance journalist and photographer, as well as hosting radio
+          shows, DJing and promoting club nights and parties. During 12 years of writing for DJmag he
+          reviewed 5,000 singles, as well as writing 26 cover stories over a three-year period. He
+          reported on the dance music scene from over 20 different countries, including Russia,
+          Brazil and China. Finally hanging up his professional dancing shoes, he was editor and
+          co-owner of Brighton's much-loved Source Magazine for eight years. During that time he
+          interviewed and gave first covers to Metronomy, Bat For Lashes, Foals, The Maccabees and
+          many more.
+        </p>
+        <p>He is an award-winning educator, working in higher education.</p>
+      </div>
+
+      <div class="tag-row">
+        <Tag>i-D</Tag><Tag>NME</Tag><Tag>BBC</Tag><Tag>DJMAG</Tag><Tag>THE GUARDIAN</Tag>
+      </div>
+
+      <MetaLine border="both" items={['AWARD-WINNING EDUCATOR', 'HIGHER EDUCATION', '[UK]']} class="credentials" />
+    </div>
+
+    <!-- Get in touch — bordered box per DS kit; mailto only, no form backend -->
+    <aside class="contact">
+      <p class="contact-title">Get in touch</p>
+      <p class="meta-micro contact-sub">Commissions · prints · talks</p>
+      <div class="contact-actions">
+        <ButtonLink href="mailto:jameswilliamkendall@gmail.com?subject=Commission%20%2F%20prints%20%2F%20talks" variant="primary">
+          Email James
+        </ButtonLink>
+        <ButtonLink href="https://instagram.com/thejameskendall" variant="secondary">
+          Instagram ↗
+        </ButtonLink>
+      </div>
+      <p class="meta-micro contact-address">jameswilliamkendall@gmail.com</p>
+    </aside>
+  </section>
+
+  <section class="cv page-pad">
+    <div class="cv-block">
+      <MetaLine border="both" items={['CLIENTS + PUBLICATIONS']} />
+      <p><strong>Photography:</strong> NME, BBC, Guardian, i-D, Mojo, Spin, FatCat Records, Ignition Records, London Records and others.</p>
+      <p><strong>Writing:</strong> DJ Magazine, Sunday Times, Classic Pop Magazine, Brighton Source, Dummy and others.</p>
+    </div>
+
+    <div class="cv-block">
+      <MetaLine border="both" items={['EXHIBITIONS', '2008—2025']} />
+      <ul class="cv-list">
+        <li><strong>Wasted On The Young</strong> (Solo Show), North Gallery, Brighton 2025</li>
+        <li><strong>Wasted On The Young</strong> (Solo Show), Duke's Lane, Brighton 2024</li>
+        <li><strong>Wasted On The Young</strong> (Solo Show), North Laine, Brighton 2024</li>
+        <li><strong>Labyrinth</strong> (Group Show), Imperial Arcade, Brighton 2024</li>
+        <li><strong>I Shot It On My Phone</strong> (Group Show), In Transit, Brighton 2024</li>
+        <li><strong>Disclosive</strong> (Group Show), CCA, Brighton 2023</li>
+        <li><strong>Source Magazine Graduate Photography</strong> (Group Show, Online) 2023</li>
+        <li><strong>One Stop Copy Shop</strong> (Group Show), University Of Brighton 2023</li>
+        <li><strong>Source Magazine 20th Birthday</strong> (Group Show), North Laine, Brighton 2018</li>
+        <li><strong>Best Before</strong> (Solo Show), Dissenting Academy, London 2014</li>
+        <li><strong>Best Before</strong> (Solo Show), Hope &amp; Ruin, Brighton 2011</li>
+        <li><strong>Lesbians To Thespians</strong> (Group Show), Marlborough Theatre, Brighton 2008</li>
+      </ul>
+    </div>
+
+    <div class="cv-block">
+      <MetaLine border="both" items={['AWARDS']} />
+      <ul class="cv-list">
+        <li><strong>BIMM University Excellence Awards</strong> — Excellence In Innovation (Winner) 2024</li>
+        <li>Provost Award For Learning &amp; Teaching (Shortlisted) 2024</li>
+        <li>Impactful Student Intervention (Nominated) 2024</li>
+        <li>Exemplifying BIMM's Values (Nominated) 2024</li>
+        <li><strong>Danny Wilson Award</strong> (Shortlisted) 2011</li>
+      </ul>
+    </div>
+
+    <div class="cv-block">
+      <MetaLine border="both" items={['EDUCATION + TEACHING']} />
+      <ul class="cv-list">
+        <li><strong>MA Photography</strong>, University Of Brighton 2023</li>
+        <li><strong>Post Graduate Certificate In Higher Education</strong>, University Of Sussex 2020</li>
+        <li><strong>HEA Fellowship</strong>, Advance HE 2020</li>
+        <li><strong>Course Leader &amp; Lecturer</strong>, BIMM University, 2015–present</li>
+        <li><strong>Guest Lectures &amp; Talks</strong> — Goldsmiths, University Of Brighton, Chichester University, Brighton Dome, Miniclick, Northbrook, 2010–present</li>
+      </ul>
+    </div>
+
+    <div class="cv-block">
+      <MetaLine border="both" items={['BOOKS + PUBLICATIONS']} />
+      <ul class="cv-list">
+        <li><strong>Wasted On The Young</strong>, Wasted Press 2023</li>
+        <li><strong>Disclosive Catalogue</strong>, Self-Published 2023</li>
+        <li><strong>Source Magazine</strong>, Brighton Source 2006–2014</li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    padding-top: var(--space-6);
+    padding-bottom: 56px;
+    align-items: start;
+  }
+
+  .prose {
+    margin-top: 28px;
+  }
+
+  .tag-row {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+    flex-wrap: wrap;
+  }
+
+  :global(.credentials) {
+    margin-top: var(--space-6);
+  }
+
+  .contact {
+    border: var(--border-width-strong) solid var(--border-strong);
+    padding: 28px;
+  }
+
+  .contact-title {
+    font-family: var(--font-display);
+    font-size: 30px;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: var(--ink-1);
+    margin-bottom: var(--space-1);
+  }
+
+  .contact-sub {
+    margin-bottom: 20px;
+  }
+
+  .contact-actions {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .contact-address {
+    margin-top: var(--space-4);
+  }
+
+  .cv {
+    display: grid;
+    gap: var(--space-7);
+    padding-bottom: 56px;
+  }
+
+  .cv-block p {
+    max-width: 72ch;
+    margin-top: var(--space-3);
+  }
+
+  .cv-list {
+    list-style: none;
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  @media (max-width: 900px) {
+    .about { grid-template-columns: 1fr; }
+  }
+</style>

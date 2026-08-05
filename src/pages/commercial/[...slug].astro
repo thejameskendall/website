@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Tag from '../../components/ds/Tag.astro';
+import MetaLine from '../../components/ds/MetaLine.astro';
+import ButtonLink from '../../components/ds/ButtonLink.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const { SHOW_DRAFTS } = await import('../../lib/flags');
+  const categories = await getCollection('commercial', ({ data }) => SHOW_DRAFTS || !data.draft);
+  return categories.map((c) => ({
+    params: { slug: c.id },
+    props: { category: c },
+  }));
+}
+
+const { category } = Astro.props;
+const { Content } = await render(category);
+
+const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURIComponent(`Commission — ${category.data.title}`)}`;
+---
+
+<BaseLayout title={category.data.title} description={category.data.summary}>
+  <section class="title-block page-pad">
+    <div class="tag-row">
+      <Tag><a href="/commercial">Commercial</a></Tag>
+      {category.data.draft && <Tag tone="faded">DRAFT</Tag>}
+    </div>
+    <h1 class="display-2">{category.data.title}</h1>
+    <p class="standfirst">{category.data.summary}</p>
+  </section>
+
+  <section class="page-pad body-block">
+    <div class="prose">
+      <Content />
+    </div>
+    <MetaLine border="both" items={['COMMISSIONS OPEN', 'BRIGHTON + LONDON', '[UK]']} class="rail" />
+    <ButtonLink href={enquire} variant="primary">Enquire</ButtonLink>
+  </section>
+</BaseLayout>
+
+<style>
+  .title-block {
+    padding-top: 36px;
+  }
+
+  .tag-row {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: 10px;
+  }
+
+  .tag-row a {
+    color: inherit;
+  }
+
+  .tag-row a:hover {
+    color: var(--signal-red);
+  }
+
+  .standfirst {
+    max-width: 52ch;
+    font-size: 17px;
+    margin-top: var(--space-5);
+  }
+
+  .body-block {
+    padding-top: var(--space-6);
+    padding-bottom: 56px;
+    display: grid;
+    gap: var(--space-5);
+    justify-items: start;
+  }
+
+  :global(.rail) {
+    width: 100%;
+  }
+</style>

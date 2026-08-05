@@ -1,0 +1,91 @@
+---
+/*
+  Site chrome per DESIGN-SPEC.md v2: DS nav pattern + locked IA.
+  Anton wordmark left, bracketed mono links right. Sticky, hairline bottom.
+  Hover/active: ink → signal red.
+*/
+const { pathname } = Astro.url;
+const isActive = (path: string) =>
+  pathname === path || pathname.startsWith(path + '/');
+
+const links = [
+  { href: '/projects', label: 'Projects' },
+  { href: '/commercial', label: 'Commercial' },
+  { href: '/writing', label: 'Writing' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<header class="site-nav page-pad">
+  <a href="/" class="wordmark" aria-label="James Kendall home">James Kendall</a>
+  <nav aria-label="Primary">
+    <ul>
+      {links.map(({ href, label }) => (
+        <li>
+          <a
+            href={href}
+            class:list={[{ active: isActive(href) }]}
+            aria-current={isActive(href) ? 'page' : undefined}
+          >[{label}]</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    border-bottom: var(--border-width-hairline) solid var(--border-hairline);
+    position: sticky;
+    top: 0;
+    background: var(--paper-1);
+    z-index: 10;
+  }
+
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 22px;
+    text-transform: uppercase;
+    color: var(--ink-1);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  .wordmark:hover {
+    color: var(--signal-red);
+  }
+
+  nav ul {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    list-style: none;
+  }
+
+  nav a {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-1);
+  }
+
+  nav a:hover,
+  nav a.active {
+    color: var(--signal-red);
+  }
+
+  @media (max-width: 720px) {
+    .site-nav {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+    nav ul { flex-wrap: wrap; gap: var(--space-4); }
+  }
+</style>

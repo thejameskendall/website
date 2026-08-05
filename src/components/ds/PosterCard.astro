@@ -1,0 +1,81 @@
+---
+/*
+  Poster-style project card: image, display title overlapping the frame,
+  meta rail below. Ported from DS core. Hover: title ink→red per DS states.
+*/
+import MetaLine from './MetaLine.astro';
+
+interface Props {
+  href: string;
+  title: string;
+  image?: string;
+  imageAlt?: string;
+  meta?: string[];
+  overlap?: boolean;
+  bw?: boolean;
+}
+const { href, title, image, imageAlt = '', meta = [], overlap = true, bw = false } = Astro.props;
+---
+
+<a class="poster-card" href={href}>
+  <div class="frame">
+    {image ? (
+      <img src={image} alt={imageAlt} class:list={[{ bw }]} loading="lazy" />
+    ) : (
+      <div class="placeholder" />
+    )}
+    <span class:list={['title', { overlap }]}>{title}</span>
+  </div>
+  {meta.length > 0 && <MetaLine items={meta} border="bottom" class="card-meta" />}
+</a>
+
+<style>
+  .poster-card {
+    display: block;
+    color: inherit;
+  }
+
+  .frame {
+    position: relative;
+    overflow: hidden;
+    background: var(--paper-3);
+  }
+
+  img,
+  .placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transition: filter var(--duration-base) var(--ease-out);
+  }
+
+  img.bw { filter: grayscale(1); }
+  .poster-card:hover img { filter: contrast(1.08); }
+  .poster-card:hover img.bw { filter: grayscale(1) contrast(1.1); }
+
+  .title {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    font-family: var(--font-display);
+    font-size: 44px;
+    line-height: var(--leading-display);
+    text-transform: uppercase;
+    color: var(--paper-1);
+    text-shadow: 0 0 24px rgba(22, 20, 18, 0.25);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .title.overlap {
+    left: -4px;
+    bottom: -6px;
+  }
+
+  .poster-card:hover .title {
+    color: var(--signal-red);
+  }
+
+  :global(.card-meta) {
+    margin-top: var(--space-2);
+  }
+</style>

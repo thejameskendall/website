@@ -1,0 +1,78 @@
+---
+/*
+  Related content strip — DESIGN-SPEC.md v2 (poster restyle).
+  Foot of project and writing pages. Within collection for v1.
+  Presentational; pages pass pre-selected items, max three shown.
+*/
+import MetaLine from './ds/MetaLine.astro';
+
+interface RelatedItem {
+  href: string;
+  title: string;
+  eyebrow: string; // collection name, e.g. "Projects" or "Writing"
+  meta: string; // date or years, catalogue style
+}
+
+interface Props {
+  items: RelatedItem[];
+  heading?: string;
+}
+
+const { items, heading = 'Related' } = Astro.props;
+const shown = items.slice(0, 3);
+---
+
+{
+  shown.length > 0 && (
+    <aside class="related-strip page-pad" aria-label={heading}>
+      <MetaLine border="both" items={[heading.toUpperCase(), `[${String(shown.length).padStart(2, '0')}]`]} />
+      <ul>
+        {shown.map((item) => (
+          <li>
+            <a href={item.href}>
+              <span class="meta-micro">{item.meta} · {item.eyebrow}</span>
+              <span class="title">{item.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )
+}
+
+<style>
+  .related-strip {
+    margin-top: var(--space-8);
+  }
+
+  ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: var(--space-5);
+  }
+
+  a {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: var(--leading-display);
+    text-transform: uppercase;
+    color: var(--ink-1);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  a:hover .title {
+    color: var(--signal-red);
+  }
+
+  @media (max-width: 720px) {
+    ul { grid-template-columns: 1fr; gap: var(--space-4); }
+  }
+</style>

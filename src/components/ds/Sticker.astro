@@ -1,0 +1,34 @@
+---
+/* White tape-label sticker (UGLY poster style) — credits and stamps. Ported from DS core. */
+interface Props {
+  label?: string;
+  rotate?: number;
+}
+const { label, rotate = -1.5 } = Astro.props;
+---
+
+<span class="sticker" style={`transform: rotate(${rotate}deg);`}>
+  {label && <span class="sticker-label">[{label}]</span>}
+  <strong><slot /></strong>
+</span>
+
+<style>
+  .sticker {
+    display: inline-block;
+    background: #fdfcf7;
+    color: var(--ink-1);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: var(--radius-sticker);
+    box-shadow: var(--shadow-paper);
+    white-space: nowrap;
+  }
+  .sticker-label {
+    color: var(--ink-3);
+    margin-right: var(--space-2);
+  }
+  strong { font-weight: var(--weight-medium); }
+</style>

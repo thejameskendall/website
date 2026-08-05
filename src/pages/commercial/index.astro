@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MetaLine from '../../components/ds/MetaLine.astro';
+import PosterCard from '../../components/ds/PosterCard.astro';
+import { getCollection } from 'astro:content';
+import { SHOW_DRAFTS } from '../../lib/flags';
+import { placeholderImage } from '../../lib/placeholders';
+
+const categories = (await getCollection('commercial', ({ data }) => SHOW_DRAFTS || !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const count = `[${String(categories.length).padStart(2, '0')}]`;
+---
+
+<BaseLayout title="Commercial" description="Commercial photography and video by James Kendall: portraits, live music, bands, events.">
+  <section class="title-block page-pad">
+    <h1>Commercial</h1>
+  </section>
+
+  <div class="page-pad">
+    <MetaLine border="both" items={['COMMISSIONS', count, 'NME · BBC · GUARDIAN · I-D']} />
+  </div>
+
+  <section class="grid page-pad">
+    {categories.map((c) => (
+      <PosterCard
+        href={`/commercial/${c.id}`}
+        title={c.data.title}
+        image={c.data.coverImage ?? placeholderImage(c.id)}
+        meta={[...(c.data.draft ? ['DRAFT'] : ['COMMISSIONED WORK'])]}
+      />
+    ))}
+  </section>
+</BaseLayout>
+
+<style>
+  .title-block {
+    padding-top: 36px;
+    padding-bottom: var(--space-5);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding-top: var(--space-5);
+    padding-bottom: 56px;
+  }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>

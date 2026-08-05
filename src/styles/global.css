@@ -1,0 +1,180 @@
+/*
+  Global styles — James Kendall Design System, per DESIGN-SPEC.md v2.
+  Tokens live in tokens.css. Poster logic: flat print, square corners,
+  no shadows, no gradients, no blur.
+*/
+
+@import './tokens.css';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--surface-page);
+  color: var(--text-body);
+  font-family: var(--font-grotesque);
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--signal-red);
+  color: var(--paper-1);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Display type — Anton, poster rules */
+
+.display-1,
+.display-2,
+h1 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+  color: var(--text-display);
+}
+
+h1,
+.display-1 { font-size: var(--type-display-1); }
+.display-2 { font-size: var(--type-display-2); }
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--type-title);
+  line-height: var(--leading-title);
+  text-transform: uppercase;
+  color: var(--text-display);
+}
+
+h3 {
+  font-family: var(--font-grotesque);
+  font-weight: var(--weight-bold);
+  font-size: var(--type-subtitle);
+  line-height: var(--leading-title);
+  color: var(--text-display);
+}
+
+p + p { margin-top: var(--space-4); }
+
+/* Mono metadata — the brand's labelling voice */
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-1);
+}
+
+.meta-micro {
+  font-family: var(--font-mono);
+  font-size: var(--type-micro);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Quiet gallery caption — Tinos italic, below images */
+
+.caption {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--text-caption);
+  margin-top: var(--space-2);
+}
+
+/* Rare handwritten accent — one use per page maximum */
+
+.scrawl {
+  font-family: var(--font-scrawl);
+  color: var(--ink-1);
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+
+/* Layout — poster margins, dense centre */
+
+.page-pad {
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
+}
+
+.prose {
+  max-width: 56ch;
+  font-size: 17px;
+  color: var(--text-body);
+}
+
+/* Inverse scope — full-bleed dark poster moments */
+
+.inverse {
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+}
+
+.inverse a { color: var(--text-on-inverse); }
+.inverse a:hover { color: var(--signal-red); }
+
+/* Skip link for keyboard users */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+
+.skip-link:focus {
+  left: var(--space-2);
+  top: var(--space-2);
+  background: var(--ink-1);
+  color: var(--paper-1);
+  padding: var(--space-1) var(--space-2);
+  z-index: 100;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

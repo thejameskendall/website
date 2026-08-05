@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Tag from '../../components/ds/Tag.astro';
+import MetaLine from '../../components/ds/MetaLine.astro';
+import RelatedStrip from '../../components/RelatedStrip.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const { SHOW_DRAFTS } = await import('../../lib/flags');
+  const posts = await getCollection(
+    'writing',
+    ({ data }) => (SHOW_DRAFTS || !data.draft) && !data.externalUrl
+  );
+  return posts.map((p) => ({
+    params: { slug: p.id },
+    props: { post: p },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { SHOW_DRAFTS } = await import('../../lib/flags');
+
+function catalogueDate(d: Date): string {
+  const month = d.toLocaleDateString('en-GB', { month: 'short' }).toUpperCase();
+  return `${String(d.getDate()).padStart(2, '0')} [${month}] ${d.getFullYear()}`;
+}
+
+// Related project lookup
+const projects = await getCollection('projects');
+const related = post.data.relatedProject
+  ? projects.find((p) => p.id === post.data.relatedProject)
+  : null;
+
+// Related strip: same-collection siblings, v1 rule
+const siblings = (await getCollection('writing', ({ data }) => SHOW_DRAFTS || !data.draft))
+  .filter((w) => w.id !== post.id)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .map((w) => ({
+    href: w.data.externalUrl ?? `/writing/${w.id}`,
+    title: w.data.title,
+    eyebrow: 'Writing',
+    meta: catalogueDate(w.data.date),
+  }));
+---
+
+<BaseLayout title={post.data.title} description={post.data.summary}>
+  <article class="piece page-pad">
+    <header>
+      <div class="tag-row">
+        <Tag><a href="/writing">Writing</a></Tag>
+        <Tag tone="faded">{post.data.type.toUpperCase().replace('-', ' ')}</Tag>
+        {post.data.publication && <Tag tone="faded">{post.data.publication.toUpperCase()}</Tag>}
+        {post.data.draft && <Tag tone="faded">DRAFT</Tag>}
+      </div>
+      <h1 class="display-2">{post.data.title}</h1>
+      <MetaLine
+        border="both"
+        items={[
+          catalogueDate(post.data.date),
+          ...(post.data.publication ? [post.data.publication.toUpperCase()] : []),
+        ]}
+        class="date-rail"
+      />
+    </header>
+
+    <div class="prose serif-prose">
+      <Content />
+    </div>
+
+    {related && (
+      <aside class="related-project">
+        <MetaLine border="both" items={['RELATED PROJECT', related.data.years]} />
+        <p class="related-link">
+          <a href={`/projects/${related.id}`}>{related.data.title}</a>
+        </p>
+      </aside>
+    )}
+  </article>
+
+  <RelatedStrip items={siblings} heading="More writing" />
+</BaseLayout>
+
+<style>
+  .piece {
+    padding-top: 36px;
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .tag-row {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .tag-row a {
+    color: inherit;
+  }
+
+  .tag-row a:hover {
+    color: var(--signal-red);
+  }
+
+  :global(.date-rail) {
+    margin-top: var(--space-5);
+    max-width: 720px;
+  }
+
+  /* Long-form reads in the grotesque; serif reserved for captions per DS */
+  .prose {
+    max-width: 66ch;
+    font-size: 17px;
+  }
+
+  .related-project {
+    max-width: 720px;
+  }
+
+  .related-link {
+    margin-top: var(--space-3);
+  }
+
+  .related-link a {
+    font-family: var(--font-display);
+    font-size: 28px;
+    text-transform: uppercase;
+    color: var(--ink-1);
+  }
+
+  .related-link a:hover {
+    color: var(--signal-red);
+  }
+</style>

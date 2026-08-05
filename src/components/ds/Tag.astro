@@ -1,0 +1,22 @@
+---
+/* Bracketed mono tag: [UK] [SOLD OUT] — the brand's chip primitive. Ported from DS core. */
+interface Props {
+  tone?: 'ink' | 'red' | 'faded';
+}
+const { tone = 'ink' } = Astro.props;
+---
+
+<span class:list={['tag', tone]}>[<slot />]</span>
+
+<style>
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .ink { color: var(--ink-1); }
+  .red { color: var(--signal-red); }
+  .faded { color: var(--ink-3); }
+</style>
