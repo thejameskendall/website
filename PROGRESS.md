@@ -2,6 +2,14 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 5 August 2026, later (git repo live)
+
+- `git init` done in `site/`, first commit made: 52 files, message "Initial commit: Astro poster-system site", branch `main`.
+- Trap hit and fixed: the mount blocks file deletion by design (data-safety guard). A failed first `git init` left a stuck `.git/index.lock` that even `rm -rf` couldn't clear. Fixed by calling `allow_cowork_file_delete` with the VM path (`/sessions/.../mnt/New Website/site/.git/index.lock`), not the Mac-facing path, which unblocked deletion for the New Website folder. Re-ran `git init` clean after.
+- Pushed to GitHub: github.com/thejameskendall/website, branch `main` tracking `origin/main`. Used a fine-grained PAT for the one-time push, then stripped it from `.git/config` (verified clean, no token stored on disk).
+- Decided: GitHub Desktop, installed and signed in on James's Mac. Token from the one-time push was revoked on GitHub. Add the `site` folder as a local repo in GitHub Desktop (File → Add Local Repository) to pick up day-to-day pushes from here on.
+- Next: connect Cloudflare Pages to the GitHub repo (build command `npm run build`, output `dist`).
+
 ## Done — 5 August 2026 (services plan, deadline confirmed)
 
 - Squarespace contract ends **mid-September 2026** — this is the hard deadline for going live.
