@@ -6,6 +6,7 @@ import MetaLine from '../../components/ds/MetaLine.astro';
 import ButtonLink from '../../components/ds/ButtonLink.astro';
 import RelatedStrip from '../../components/RelatedStrip.astro';
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import { SHOW_DRAFTS } from '../../lib/flags';
 import { placeholderImage } from '../../lib/placeholders';
 
@@ -23,8 +24,16 @@ const { Content } = await render(project);
 
 const number = `PROJECT ${String(project.data.order).padStart(2, '0')}`;
 const ongoing = /[—–-]\s*$/.test(project.data.years);
-const image = project.data.coverImage ?? placeholderImage(project.id);
-const usingPlaceholder = !project.data.coverImage;
+
+// Real gallery takes over from the legacy single placeholder image once present.
+const gallery = project.data.images ?? [];
+const hasGallery = gallery.length > 0;
+const hero = hasGallery ? gallery[0] : null;
+const restOfGallery = hasGallery ? gallery.slice(1) : [];
+const exhibitionViews = project.data.exhibitionViews ?? [];
+
+const placeholderSrc = project.data.coverImage ?? placeholderImage(project.id);
+const usingPlaceholder = !hasGallery && !project.data.coverImage;
 
 // Related writing from frontmatter
 const allWriting = await getCollection('writing', ({ data }) => SHOW_DRAFTS || !data.draft);
@@ -60,17 +69,21 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
   </section>
 
   <!-- Image spread -->
-  {image && (
+  {(hero || placeholderSrc) && (
     <section class="spread page-pad">
       <figure class="plate">
-        <img src={image} alt={`From ${project.data.title}`} />
+        {hero ? (
+          <Image src={hero.src} alt={hero.caption ?? `From ${project.data.title}`} width={1500} height={1125} />
+        ) : (
+          <img src={placeholderSrc} alt={`From ${project.data.title}`} />
+        )}
         {usingPlaceholder && (
           <div class="plate-sticker">
             <Sticker rotate={2} label="TEMP">PLACEHOLDER</Sticker>
           </div>
         )}
         <figcaption class="caption">
-          {project.data.title}, {project.data.years}.
+          {hero?.caption ?? `${project.data.title}, ${project.data.years}.`}
         </figcaption>
       </figure>
       <div class="side">
@@ -92,6 +105,36 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
       <Content />
     </div>
   </section>
+
+  <!-- Full plate sequence -->
+  {restOfGallery.length > 0 && (
+    <section class="page-pad gallery-block">
+      <MetaLine border="both" items={['PLATES', `[${String(gallery.length).padStart(2, '0')}]`]} />
+      <div class="gallery-grid">
+        {restOfGallery.map((plate) => (
+          <figure class="gallery-item">
+            <Image src={plate.src} alt={plate.caption ?? project.data.title} width={900} height={675} />
+            {plate.caption && <figcaption class="caption">{plate.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Exhibition views -->
+  {exhibitionViews.length > 0 && (
+    <section class="page-pad gallery-block">
+      <MetaLine border="both" items={['EXHIBITION VIEWS']} />
+      <div class="gallery-grid">
+        {exhibitionViews.map((view) => (
+          <figure class="gallery-item">
+            <Image src={view.src} alt={view.caption ?? 'Exhibition view'} width={900} height={675} />
+            {view.caption && <figcaption class="caption">{view.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    </section>
+  )}
 
   {relatedWriting.length > 0 && (
     <section class="page-pad writing-block">
@@ -169,6 +212,35 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+  }
+
+  .gallery-block {
+    margin-top: var(--space-7);
+  }
+
+  .gallery-grid {
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+
+  .gallery-item {
+    margin: 0;
+  }
+
+  .gallery-item :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  @media (max-width: 900px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 560px) {
+    .gallery-grid { grid-template-columns: 1fr; }
   }
 
   .writing-block {

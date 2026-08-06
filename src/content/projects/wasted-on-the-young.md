@@ -4,6 +4,42 @@ years: 2022–2024
 order: 1
 summary: In service to the understanding of the intersection of ageing, youth culture and identity.
 draft: true
+images:
+  - src: ../../assets/images/wasted-on-the-young/1.jpg
+    caption: Untitled 01, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/2.jpg
+    caption: Untitled 02, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/3.jpg
+    caption: Untitled 03, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/4.jpg
+    caption: Untitled 04, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/5.jpg
+    caption: Untitled 05, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/6.jpg
+    caption: Untitled 06, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/7.jpg
+    caption: Untitled 07, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/8.jpg
+    caption: Untitled 08, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/9.jpg
+    caption: Untitled 09, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/10.jpg
+    caption: Untitled 10, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/11.jpg
+    caption: Untitled 11, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/12.jpg
+    caption: Untitled 12, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/13.jpg
+    caption: Untitled 13, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/14.jpg
+    caption: Untitled 14, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+  - src: ../../assets/images/wasted-on-the-young/15.jpg
+    caption: Untitled 15, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss
+exhibitionViews:
+  - src: ../../assets/images/wasted-on-the-young/exhibition/DSCF1458.jpg.webp
+    caption: Exhibition view, Disclosive group show, CCA, Brighton
+  - src: ../../assets/images/wasted-on-the-young/exhibition/DSCF1462.jpg.webp
+    caption: Exhibition view, Disclosive group show, CCA, Brighton
 relatedWriting:
   - all-under-one-roof-raving
 ---
