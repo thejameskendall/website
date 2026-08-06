@@ -2,6 +2,23 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 6 August 2026 (Cloudflare live, first real content migrated)
+
+- Cloudflare deploy sorted. Cloudflare's moved static sites onto the Workers static-assets path rather than classic Pages, needed one new file, `wrangler.jsonc` (name, compatibility_date, assets directory `./dist`). Live at https://website.jameswilliamkendall.workers.dev.
+- Detour: GitHub Desktop had cloned a second, separate copy of the repo into `Documents/GitHub/website`, which is why it kept showing stale state. Fixed by removing that entry from GitHub Desktop and re-adding the real folder (`Claude Cowork/.../New Website/site`) via Add Local Repository.
+- First real content migrated: **Wasted On The Young**. James dropped the source material into `New Website/Website Content/Wested On The Young/` (15 plate images, 2 exhibition view photos, TEXT.md with the project statement).
+- Schema change: `projects` collection now supports `images[]` and `exhibitionViews[]` arrays (via Astro's `image()` helper, so they get the sharp build pipeline automatically), plus an optional `videoUrl` for later. Old `coverImage` string field kept for the five projects not yet migrated.
+- Project detail page rebuilt: real hero image, full plate gallery grid below the text, separate exhibition views section. Falls back to the old single-placeholder logic automatically for anything without real images yet.
+- Home and Projects index cards updated to show WOTY's real cover photo instead of the placeholder.
+- Build verified clean: 17 pages, all 17 real images processed (avg. ~75% file size reduction to WebP).
+- Video not embedded yet — James said the book video is still to come, `videoUrl` field is ready for it.
+- Committed locally (`git log`: "Real gallery support: Wasted On The Young content migration"), not yet pushed — James needs to push via GitHub Desktop next session.
+
+### Open question for James
+
+- TEXT.md gives the plate caption as "2022-2023" but the frontmatter elsewhere (and the existing project summary) says "2022–2024". Used 2022–2024 across all 15 captions for consistency with the rest of the site. Confirm this is right, or say which years are correct.
+- Small cosmetic gap: the small thumbnail on the homepage/Projects grid card uses the plain JPEG rather than the compressed WebP version (the full gallery and hero do use WebP correctly). Works fine, just not optimised. Low priority, can fix later.
+
 ## Done — 5 August 2026, later (git repo live)
 
 - `git init` done in `site/`, first commit made: 52 files, message "Initial commit: Astro poster-system site", branch `main`.
