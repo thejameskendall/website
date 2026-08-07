@@ -2,6 +2,13 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 6 August 2026, later (hero carousel)
+
+- James's call: replace the static grid + exhibition views sections with a single carousel in the hero spread, all plates and exhibition views in one place. Manual navigation only (prev/next + arrow keys), no autoplay — matches the poster system's static, editorial feel.
+- Applies to any project with real `images`/`exhibitionViews` data. Projects still on the placeholder fall back to the old single static image, unaffected.
+- Fixed a script placement bug during build testing: the `<script>` was rendering after `</html>` instead of inside `<body>`. Caught it, moved it inside `BaseLayout`, verified in the built HTML before committing.
+- Committed locally, not yet pushed.
+
 ## Done — 6 August 2026 (Cloudflare live, first real content migrated)
 
 - Cloudflare deploy sorted. Cloudflare's moved static sites onto the Workers static-assets path rather than classic Pages, needed one new file, `wrangler.jsonc` (name, compatibility_date, assets directory `./dist`). Live at https://website.jameswilliamkendall.workers.dev.
