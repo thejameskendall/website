@@ -3,7 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Tag from '../../components/ds/Tag.astro';
 import Sticker from '../../components/ds/Sticker.astro';
 import MetaLine from '../../components/ds/MetaLine.astro';
-import ButtonLink from '../../components/ds/ButtonLink.astro';
 import RelatedStrip from '../../components/RelatedStrip.astro';
 import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
@@ -150,17 +149,17 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
     </section>
   )}
 
-  <!-- Prints / enquire — moved below Related Writing per James, 11 Aug. Tidied 11 Aug: -->
-  <!-- dropped the PRINTS/ENQUIRE and WRITING count MetaLine rows, redundant once the -->
-  <!-- actual Related Writing list is already visible directly above. -->
+  <!-- Prints / enquire — annotated screenshot, 11 Aug: buttons removed, row itself -->
+  <!-- is now the link. "MORE PROJECTS" below does the same job the old "All projects" -->
+  <!-- button did, so that button's gone too. -->
   <section class="page-pad side-block">
-    <div class="actions">
-      <ButtonLink href={enquire} variant="primary">Enquire about prints</ButtonLink>
-      <ButtonLink href="/projects" variant="ghost">All projects →</ButtonLink>
+    <div class="prints-row">
+      <span>PRINTS</span>
+      <a href={enquire}>ENQUIRE →</a>
     </div>
   </section>
 
-  <RelatedStrip items={siblings} heading="More projects" />
+  <RelatedStrip items={siblings} heading="More projects" headingHref="/projects" />
 
   {hasGallery && (
   <script>
@@ -293,14 +292,28 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
 
   .side-block {
     margin-top: var(--space-7);
-    padding-top: var(--space-5);
-    border-top: var(--border-width-hairline) solid var(--border-hairline);
   }
 
-  .actions {
+  .prints-row {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: 7px 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-1);
+    border-top: var(--border-width-hairline) solid var(--border-hairline);
+    border-bottom: var(--border-width-hairline) solid var(--border-hairline);
+  }
+
+  .prints-row a {
+    color: inherit;
+  }
+
+  .prints-row a:hover {
+    color: var(--signal-red);
   }
 
   .writing-block {

@@ -16,16 +16,23 @@ interface RelatedItem {
 interface Props {
   items: RelatedItem[];
   heading?: string;
+  headingHref?: string; // when set, the heading row itself links out (e.g. to "/projects")
 }
 
-const { items, heading = 'Related' } = Astro.props;
+const { items, heading = 'Related', headingHref } = Astro.props;
 const shown = items.slice(0, 3);
 ---
 
 {
   shown.length > 0 && (
     <aside class="related-strip page-pad" aria-label={heading}>
-      <MetaLine border="both" items={[heading.toUpperCase(), `[${String(shown.length).padStart(2, '0')}]`]} />
+      {headingHref ? (
+        <a href={headingHref} class="heading-link">
+          <MetaLine border="both" items={[heading.toUpperCase(), `[${String(shown.length).padStart(2, '0')}]`]} />
+        </a>
+      ) : (
+        <MetaLine border="both" items={[heading.toUpperCase(), `[${String(shown.length).padStart(2, '0')}]`]} />
+      )}
       <ul>
         {shown.map((item) => (
           <li>
@@ -53,7 +60,7 @@ const shown = items.slice(0, 3);
     margin-top: var(--space-5);
   }
 
-  a {
+  ul a {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
@@ -68,7 +75,15 @@ const shown = items.slice(0, 3);
     transition: color var(--duration-fast) var(--ease-out);
   }
 
-  a:hover .title {
+  ul a:hover .title {
+    color: var(--signal-red);
+  }
+
+  .heading-link {
+    display: block;
+  }
+
+  .heading-link:hover :global(.metaline) {
     color: var(--signal-red);
   }
 
