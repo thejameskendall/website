@@ -150,12 +150,10 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
     </section>
   )}
 
-  <!-- Prints / enquire — moved below Related Writing per James, 11 Aug -->
+  <!-- Prints / enquire — moved below Related Writing per James, 11 Aug. Tidied 11 Aug: -->
+  <!-- dropped the PRINTS/ENQUIRE and WRITING count MetaLine rows, redundant once the -->
+  <!-- actual Related Writing list is already visible directly above. -->
   <section class="page-pad side-block">
-    <MetaLine border="both" items={['PRINTS', 'ENQUIRE']} />
-    {(relatedWriting.length + documents.length) > 0 && (
-      <MetaLine border="bottom" items={['WRITING', `[${String(relatedWriting.length + documents.length).padStart(2, '0')}]`]} />
-    )}
     <div class="actions">
       <ButtonLink href={enquire} variant="primary">Enquire about prints</ButtonLink>
       <ButtonLink href="/projects" variant="ghost">All projects →</ButtonLink>
@@ -295,14 +293,11 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
 
   .side-block {
     margin-top: var(--space-7);
-  }
-
-  .side-block :global(.metaline + .metaline) {
-    margin-top: 0;
+    padding-top: var(--space-5);
+    border-top: var(--border-width-hairline) solid var(--border-hairline);
   }
 
   .actions {
-    margin-top: var(--space-5);
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
