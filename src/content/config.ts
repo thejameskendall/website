@@ -27,6 +27,14 @@ const projects = defineCollection({
         )
         .optional(),
       videoUrl: z.string().optional(), // to be added once the book video is ready
+      documents: z
+        .array(
+          z.object({
+            label: z.string(),
+            url: z.string(),
+          })
+        )
+        .optional(), // supplementary PDFs (research dossiers etc.), listed alongside Related Writing, open in a new tab
       relatedWriting: z.array(z.string()).optional(), // slugs of writing pieces
       draft: z.boolean().default(false),
     }),

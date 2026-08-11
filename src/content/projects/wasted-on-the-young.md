@@ -4,6 +4,9 @@ years: 2022–2024
 order: 1
 summary: In service to the understanding of the intersection of ageing, youth culture and identity.
 draft: true
+documents:
+  - label: Research Dossier
+    url: /documents/wasted-on-the-young/research-dossier.pdf
 images:
   - src: ../../assets/images/wasted-on-the-young/1.jpg
     caption: Untitled 01, Wasted On The Young, 2022–2024, Giclée print on Canson High Gloss

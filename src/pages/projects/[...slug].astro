@@ -39,6 +39,7 @@ const allWriting = await getCollection('writing', ({ data }) => SHOW_DRAFTS || !
 const relatedWriting = (project.data.relatedWriting ?? [])
   .map((slug) => allWriting.find((w) => w.id === slug))
   .filter(Boolean);
+const documents = project.data.documents ?? [];
 
 // Related strip: same-collection siblings, v1 rule
 const siblings = (await getCollection('projects', ({ data }) => SHOW_DRAFTS || !data.draft))
@@ -117,8 +118,8 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
       )}
       <div class="side">
         <MetaLine border="both" items={['PRINTS', 'ENQUIRE']} />
-        {relatedWriting.length > 0 && (
-          <MetaLine border="bottom" items={['WRITING', `[${String(relatedWriting.length).padStart(2, '0')}]`]} />
+        {(relatedWriting.length + documents.length) > 0 && (
+          <MetaLine border="bottom" items={['WRITING', `[${String(relatedWriting.length + documents.length).padStart(2, '0')}]`]} />
         )}
         <div class="actions">
           <ButtonLink href={enquire} variant="primary">Enquire about prints</ButtonLink>
@@ -135,7 +136,7 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
     </div>
   </section>
 
-  {relatedWriting.length > 0 && (
+  {(relatedWriting.length > 0 || documents.length > 0) && (
     <section class="page-pad writing-block">
       <MetaLine border="both" items={['RELATED WRITING']} />
       <ul class="writing-list">
@@ -144,6 +145,14 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
             <a href={w!.data.externalUrl ?? `/writing/${w!.id}`}>
               <span class="meta-micro">{w!.data.publication ?? 'ESSAY'}</span>
               <span class="writing-title">{w!.data.title}</span>
+            </a>
+          </li>
+        ))}
+        {documents.map((doc) => (
+          <li>
+            <a href={doc.url} target="_blank" rel="noopener noreferrer">
+              <span class="meta-micro">PDF</span>
+              <span class="writing-title">{doc.label}</span>
             </a>
           </li>
         ))}
