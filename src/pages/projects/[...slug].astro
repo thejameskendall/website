@@ -68,9 +68,9 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
     <p class="standfirst">{project.data.summary}</p>
   </section>
 
-  <!-- Image spread — carousel when a real gallery exists, static placeholder otherwise -->
+  <!-- Image spread — full width. Carousel when a real gallery exists, static placeholder otherwise -->
   {(hasGallery || placeholderSrc) && (
-    <section class="spread page-pad">
+    <section class="spread">
       {hasGallery ? (
         <div class="carousel" data-carousel>
           <div class="carousel-frame">
@@ -87,7 +87,7 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
             ))}
           </div>
           {carouselImages.length > 1 && (
-            <div class="carousel-controls">
+            <div class="carousel-controls page-pad">
               <button type="button" class="carousel-prev meta" aria-label="Previous image">← PREV</button>
               <span class="carousel-count meta-micro">
                 <span class="carousel-current">01</span> / {String(carouselImages.length).padStart(2, '0')}
@@ -95,7 +95,7 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
               <button type="button" class="carousel-next meta" aria-label="Next image">NEXT →</button>
             </div>
           )}
-          <p class="caption carousel-caption">
+          <p class="caption carousel-caption page-pad">
             {carouselImages.map((img, i) => (
               <span class="carousel-caption-text" hidden={i !== 0}>
                 {img.caption ?? `${project.data.title}, ${project.data.years}.`}
@@ -107,25 +107,15 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
         <figure class="plate">
           <img src={placeholderSrc} alt={`From ${project.data.title}`} />
           {usingPlaceholder && (
-            <div class="plate-sticker">
+            <div class="plate-sticker page-pad">
               <Sticker rotate={2} label="TEMP">PLACEHOLDER</Sticker>
             </div>
           )}
-          <figcaption class="caption">
+          <figcaption class="caption page-pad">
             {project.data.title}, {project.data.years}.
           </figcaption>
         </figure>
       )}
-      <div class="side">
-        <MetaLine border="both" items={['PRINTS', 'ENQUIRE']} />
-        {(relatedWriting.length + documents.length) > 0 && (
-          <MetaLine border="bottom" items={['WRITING', `[${String(relatedWriting.length + documents.length).padStart(2, '0')}]`]} />
-        )}
-        <div class="actions">
-          <ButtonLink href={enquire} variant="primary">Enquire about prints</ButtonLink>
-          <ButtonLink href="/projects" variant="ghost">All projects →</ButtonLink>
-        </div>
-      </div>
     </section>
   )}
 
@@ -159,6 +149,18 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
       </ul>
     </section>
   )}
+
+  <!-- Prints / enquire — moved below Related Writing per James, 11 Aug -->
+  <section class="page-pad side-block">
+    <MetaLine border="both" items={['PRINTS', 'ENQUIRE']} />
+    {(relatedWriting.length + documents.length) > 0 && (
+      <MetaLine border="bottom" items={['WRITING', `[${String(relatedWriting.length + documents.length).padStart(2, '0')}]`]} />
+    )}
+    <div class="actions">
+      <ButtonLink href={enquire} variant="primary">Enquire about prints</ButtonLink>
+      <ButtonLink href="/projects" variant="ghost">All projects →</ButtonLink>
+    </div>
+  </section>
 
   <RelatedStrip items={siblings} heading="More projects" />
 
@@ -219,12 +221,8 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
   }
 
   .spread {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 28px;
     padding-top: var(--space-6);
     padding-bottom: var(--space-6);
-    align-items: start;
   }
 
   .plate {
@@ -240,8 +238,9 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
 
   .plate-sticker {
     position: absolute;
-    right: -8px;
+    right: var(--page-margin);
     top: 18px;
+    padding: 0 !important;
   }
 
   .carousel {
@@ -294,7 +293,11 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
     margin-top: var(--space-2);
   }
 
-  .side :global(.metaline + .metaline) {
+  .side-block {
+    margin-top: var(--space-7);
+  }
+
+  .side-block :global(.metaline + .metaline) {
     margin-top: 0;
   }
 
@@ -332,9 +335,5 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
 
   .writing-list a:hover .writing-title {
     color: var(--signal-red);
-  }
-
-  @media (max-width: 900px) {
-    .spread { grid-template-columns: 1fr; }
   }
 </style>
