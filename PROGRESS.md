@@ -2,6 +2,12 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 11 August 2026 (Research Dossier PDF link)
+
+- New reusable schema field: `documents[]` (label + url) on the projects collection, for supplementary PDFs (dossiers, press packs). Served as static files from `public/documents/<slug>/`.
+- WOTY's Research Dossier PDF (15MB) added, linked from the Related Writing section, opens in a new tab.
+- Committed locally, not yet pushed.
+
 ## Done — 6 August 2026, later (hero carousel)
 
 - James's call: replace the static grid + exhibition views sections with a single carousel in the hero spread, all plates and exhibition views in one place. Manual navigation only (prev/next + arrow keys), no autoplay — matches the poster system's static, editorial feel.
