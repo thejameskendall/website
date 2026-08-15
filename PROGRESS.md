@@ -2,6 +2,15 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 15 August 2026, later (first CMS-triggered build break, fixed)
+
+- James used the CMS for real: edited "All Under One Roof Raving" with the full essay body and an inline image. Confirmed the CMS → GitHub → Cloudflare pipeline works exactly as designed, no extra glue needed — the Writing page already reads the same files the CMS edits.
+- Site went stale for ~15 minutes. Cause: Sveltia writes `''` (empty string) for a blank optional field rather than omitting it. `externalUrl: z.string().url().optional()` rejects `''` outright, so the build crashed at the content-sync step the moment External URL was left blank in the CMS. Site stayed on the last successful deploy the whole time — nothing was down, just stuck.
+- Diagnosed via Cloudflare's Deployments tab (build log showed `InvalidContentEntryDataError... externalUrl: Invalid url`), confirmed the exact cause, fixed the schema to treat `''` as unset before validating.
+- Also: James's GitHub commit (via CMS) went straight to `origin/main`, bypassing his local GitHub Desktop clone entirely — different from every previous change, which went local commit → GitHub Desktop push. Had to `git fetch` + fast-forward pull before making the fix, to avoid diverging history.
+- Fix committed locally, needs a GitHub Desktop push (no stored push token in this session, by design).
+- Worth watching: any other CMS-editable field with `.url()` or similar strict validation could hit the same failure mode. Only `externalUrl` exists today; revisit if more fields like it get added.
+
 ## Done — 15 August 2026 (Sveltia CMS for Writing)
 
 - Live at `/admin` once pushed and deployed. Sveltia CMS, git-based, free, no extra hosting.
