@@ -9,6 +9,8 @@ summary: The essay that accompanies the Wasted On The Young photos. A personal p
 draft: true
 ---
 
+![](/images/writing/Screenshot%2B2024-09-11%2Bat%2B21.00.35.png.webp)
+
 **I can’t remember the first time I danced.** 
 
 But I can remember the need to dance taking over me at the age of 17, when I started sneaking into nightclubs. Music had consumed my life, had given me an identity I was so desperately looking for. My peers – even, sometimes, girls! – would ask my opinion on the latest indie releases from the like of Suede, Mudhoney and Madder Rose. And, god, did I have an opinion. This bled onto the dancefloor where there were songs that I _needed_ to dance to, to claim from the soundwaves in the air, and those I would hide in the corner from, away from the speakers as if in fear that they would taint me. Music was my life and dancing was the physical manifestation of this first love.
