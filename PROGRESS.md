@@ -2,6 +2,22 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 15 August 2026 (Sveltia CMS for Writing)
+
+- Live at `/admin` once pushed and deployed. Sveltia CMS, git-based, free, no extra hosting.
+- Auth: personal access token (checked Sveltia's own docs — for a single-user GitHub backend, this is their recommended method, no Cloudflare Worker or OAuth app needed. Originally asked for the Worker route; corrected course once the docs made clear it was unnecessary complexity for one user).
+- Writing collection only for v1: title, date, type, publication, externalUrl, relatedProject, summary, draft, body — matches `src/content/config.ts` exactly.
+- Projects/Commercial not in the CMS yet — deliberately held back. Those files have nested image galleries that need careful field mapping first, to avoid the CMS overwriting that data on save. Add later, one collection at a time, same pattern.
+- CMS-uploaded images go to `public/images/writing` (plain static files, not through the sharp pipeline). Fine for inline article images, not for the same treatment as project photography.
+- Committed locally, not yet pushed.
+
+### To log in
+
+1. Push via GitHub Desktop, wait for Cloudflare to redeploy.
+2. Go to `<site>/admin`.
+3. Click "Sign In with Token". It links straight to GitHub's token creation page with the right permissions pre-selected.
+4. Generate the token, paste it back into the CMS prompt.
+
 ## Done — 11 August 2026 (Research Dossier PDF link)
 
 - New reusable schema field: `documents[]` (label + url) on the projects collection, for supplementary PDFs (dossiers, press packs). Served as static files from `public/documents/<slug>/`.
