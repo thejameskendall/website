@@ -1,0 +1,79 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+#
+# Sveltia CMS config. Single-user setup: login is via personal access token
+# (no OAuth app / Cloudflare worker needed — see Sveltia docs, "Access Token"
+# under GitHub backend authentication).
+#
+# Scope for v1: Writing collection only. Projects/Commercial aren't wired up
+# here yet — those content files have nested image galleries (images[],
+# exhibitionViews[], documents[]) that need careful field mapping to avoid
+# the CMS stripping data on save. Add later, one collection at a time.
+
+backend:
+  name: github
+  repo: thejameskendall/website
+  branch: main
+
+media_folder: /public/images/writing
+public_folder: /images/writing
+
+collections:
+  - name: writing
+    label: Writing
+    label_singular: Article
+    folder: src/content/writing
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - label: Title
+        name: title
+        widget: string
+
+      - label: Date
+        name: date
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
+
+      - label: Type
+        name: type
+        widget: select
+        options:
+          - { label: Essay, value: essay }
+          - { label: Journalism, value: journalism }
+          - { label: Project writing, value: project-writing }
+
+      - label: Publication
+        name: publication
+        widget: string
+        required: false
+        hint: 'Leave blank if this was published directly on the site rather than elsewhere.'
+
+      - label: External URL
+        name: externalUrl
+        widget: string
+        required: false
+        hint: 'Only if this piece lives elsewhere (e.g. a magazine site) rather than as a full article here.'
+
+      - label: Related Project
+        name: relatedProject
+        widget: string
+        required: false
+        hint: 'Enter the project slug exactly, e.g. wasted-on-the-young. Leave blank if not related to a project.'
+
+      - label: Summary
+        name: summary
+        widget: text
+        hint: 'One or two sentences — used on the Writing index page and social previews.'
+
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: true
+        hint: 'On means hidden from the live site until you switch it off.'
+
+      - label: Body
+        name: body
+        widget: markdown
