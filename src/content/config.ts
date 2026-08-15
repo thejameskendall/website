@@ -51,6 +51,12 @@ const commercial = defineCollection({
   }),
 });
 
+// Sveltia CMS writes an empty string for a blank optional text field rather
+// than omitting the key. z.string().url() rejects '' outright, which crashed
+// the build the first time the CMS saved an entry with External URL left
+// blank. This treats '' the same as "not set" before validating.
+const blankToUndefined = (v: unknown) => (v === '' ? undefined : v);
+
 const writing = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/writing' }),
   schema: z.object({
@@ -58,7 +64,7 @@ const writing = defineCollection({
     date: z.date(),
     type: z.enum(['journalism', 'essay', 'project-writing']),
     publication: z.string().optional(),
-    externalUrl: z.string().url().optional(), // if outbound-only
+    externalUrl: z.preprocess(blankToUndefined, z.string().url().optional()), // if outbound-only
     relatedProject: z.string().optional(), // slug of related project
     summary: z.string(),
     draft: z.boolean().default(false),
