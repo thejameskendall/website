@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "The Wytches are one of the funnest bands I’ve ever interviewed. Opinionated and outrageous, even though one third of them was almost too hungover to speak.“From there, talk turns to a night in Lincoln that started with…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1545843028622-3ORANHPGQCBBM6EHDFH4/the-wytches-675x450.jpg?format=original)
+![](/images/writing/the-wytches-interview/the-wytches-interview.webp)
 
 **OCTOBER 3, 2013**
 

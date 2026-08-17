@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "I got to train with Brighton’s roller derby team. Not many men can say that, and that’s why I love being a journalist.““I don’t think I’ve ever met anyone who’s gone to their first game and hasn’t said, ‘It was amazing…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1560891695800-L89PSU0TG5RSKW88LDQ6/BrightonRockers2.jpg?format=original)
+![](/images/writing/roller-derby-feature/roller-derby-feature.webp)
 
 One of the most positive things to come out of the Olympic coverage was how much everyone enjoyed the women’s events. After years of being marginalised, finally women’s sport was being taken seriously. Buzzed by seeing Jessica Ennis and co rack up the golds, acres of press was devoted to how we wanted to see more women’s sport on TV. So what happened? Fuck all. Back to the status quo – men’s football, men’s rugby, men’s darts.
 

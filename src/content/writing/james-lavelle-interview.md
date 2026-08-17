@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "I had a great night out with Mo Wax’s James Lavelle in Romania. I know he’s got a bit of a, er, reputation, but we got on like a house on fire. This report is from DJmag.“But the experience hasn’t been all plain…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1560794671374-QH1O48X371P85YEIN5XD/James-Lavelle-Packshot-copy%402x.jpg?format=original)
+![](/images/writing/james-lavelle-interview/james-lavelle-interview.webp)
 
 **2004**
 

@@ -5,11 +5,9 @@ type: journalism
 draft: true
 summary: "Kimya Dawson's gig knocked everyone who was there sideways. Even before she left the stage crying.“But after a bad joke interlude, an acoustic rap song and a mock operatic number with dance moves (about eating farts)…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1560935210169-QPE85EALZ69FJC6HSJCP/Kimya-Dawson-25.jpg?format=original)
+![](/images/writing/kimya-dawson-review/kimya-dawson-review-1.webp)
 
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1560935248037-JGVC7PD0Z2FJ9OZZWRHX/Kimya-Dawson-12.jpg?format=original)
+![](/images/writing/kimya-dawson-review/kimya-dawson-review-2.webp)
 
 Kimya Dawson is not having a good day but she’s putting such a brave face on things that we wouldn’t even know. At least initially. Yet she’ll leave the stage at the end of an intense set in tears, as the crowd sings out a positive message.
 

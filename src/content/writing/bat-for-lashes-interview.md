@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "Within about five minutes of Bat For Lashes first single arriving on my desk I was on the phone to get her on the cover, her first. This was the final of three times I interviewed her - a Q&A but she was on good…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1560894027136-3H258L1C6WQGDLOE7H7T/batforlashes.jpg?format=original)
+![](/images/writing/bat-for-lashes-interview/bat-for-lashes-interview.webp)
 
 **For her third album ‘The Haunted Man’ Natasha Khan has stripped back her sound and her look to expose more of herself than ever. But it’s not been an easy process. Writer’s block took her to the edge of walking away from music, but courses at Brighton University and gardening at Charleston House gave her a new headspace to be creative again. It’s a more mature album from an artist who is ready to settle down. **
 

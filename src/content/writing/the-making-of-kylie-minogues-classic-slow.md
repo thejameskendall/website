@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "I interviewed writer/producer Emiliana Torrini about the making of Kylie’s stone cold pop classic ‘Slow’. Read a snippet here because it’s not out yet and you should go and buy the magazine when it is.“Ask any serious…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/7eb77e44-ca6d-404b-9812-50ec23636133/kylie-minogue-tension-album-2000x1270-1.jpg?format=original)
+![](/images/writing/the-making-of-kylie-minogues-classic-slow/the-making-of-kylie-minogues-classic-slow.webp)
 
 Ask any serious minded Kylie fan and there’s a fair chance that they will tell you ‘Slow’ is one of their favourite songs by the Aussie pop star. Hell, you could even ask Kylie herself and she’d say the same thing, frequently announcing it her crowning glory. Twenty years after the song went to number one in Britain she’s still as keen as ever, telling Vogue that the song is a reference point for new album ‘Tension’. There’s certainly parallels between the ‘Body Language’ lead song and the smash first single from the new LP, ‘Padam Padam’, with Kylie meeting an object of lust in a club and having such a connection that causes heartbeats to come centre stage (“Skip a beat and move with my body” she purrs in ‘Slow’).
 

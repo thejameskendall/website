@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "Sea Power are Brighton legends. I put them on the cover three times and this was the final time, while they were still called British Sea Power, I interviewed them for their brilliant ‘Machineries Of Joy’.“The whole…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1560887851007-TL7EXT6SYL865MRW4HTW/BSP1.jpg?format=original)
+![](/images/writing/british-sea-power-interview/british-sea-power-interview.webp)
 
 Back at the break of the millennium things weren’t going too well for the humble indie band. Britpop had bored itself to death and The Strokes had still to get people excited about rock’n’roll again. The NME hadn’t invented The Libertines yet, and Coldplay were the group influencing young musicians. And then a band called British Air Powers, a band full of ideas and energy, moved down from Reading. Brighton was saved. A slight name change and 13 years later they are – mostly – still here and still resolutely on top of their game. Last year alone saw their Krankenhaus club residency at The Haunt, a lauded soundtrack, a gig at CERN and 30 new demos released.
 

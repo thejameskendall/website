@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "Martin Rossiter is a world class interviewee - clever, witty, charming. From years as the frontman of Gene, he absolutely knows what makes a good interview, and helps you get it.“Sales might not come close to the…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1560886818762-BDHWOEPYR7X37GPHICAE/Martin-Rossiter-for-SOURCE-2.jpg?format=original)
+![](/images/writing/martin-rossiter-interview/martin-rossiter-interview.webp)
 
 Eighteen years ago this month Gene were on the cover of _Melody Maker_ – and not for the last time that year. But their former singer has never been so acclaimed as he’s been for his debut solo album ‘The Defenestration Of St. Martin’, a set of stripped back torch songs featuring just his voice and a piano that falls somewhere between Morrissey’s heart-on-sleeve crooning and Nick Cave’s intense balladry.
 

@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "I interviewed Metronomy before they broke through with the flawless The English Riviera. I ought to work in A&R really. The photos were by Tom Beard. As good as these pics were, I sacked him and he went on to direct pop…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1560791622693-SKG98T4DQK6CG1H04QJ6/metronomy2.jpg?format=original)
+![](/images/writing/metronomy-interview/metronomy-interview.webp)
 
 **AUGUST 2007**
 

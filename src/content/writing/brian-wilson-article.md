@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "Together The People festival asked me to write a piece about Brian Wilson for their brochure. I used it as an excuse to talk about the start of a friendship which was soundtracked by The Beach Boys.“When he emerged from…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/b9589a22-3f6d-4b5a-8ef1-7a92fd884cb1/fNj8nMxbrCb6BuLxkvZSeh.jpg?format=original)
+![](/images/writing/brian-wilson-article/brian-wilson-article.webp)
 
 I met Craig when I returned home from university to my small town. He’d taken over from my job at the local independent record shop so, obviously, we bonded over music. I even split up with my pretty girlfriend because I enjoyed sitting in his box room talking about record sleeves more than I enjoyed spending time with her. In hindsight this was madness but, quite apart from a lasting friendship, it left me with a deep love of Brian Wilson.  
 

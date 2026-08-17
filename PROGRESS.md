@@ -2,6 +2,24 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 17 August 2026 (Squarespace Writing migration)
+
+- James uploaded a fresh export (`Squarespace-Wordpress-Export-08-17-2026.xml`). Found three content buckets inside: `writing` (23 items, matches the site's IA directly), `blog` (42 older items, different old URL, not currently part of the IA), `blog-forte` (4 items + several `-forte` pages, unrelated leftover from a different old project).
+- James's call: migrate `writing` only, all 22 (excluding the one already hand-migrated) come in as `draft: true` regardless of their old Squarespace status, for review via the CMS at his own pace.
+- Built `scripts/migrate-writing.py` — parses the WXR export properly (XML-aware, not regex), converts Squarespace's HTML to clean markdown, writes frontmatter matching the schema. Reusable if the `blog` bucket ever gets migrated too.
+- Cleaned up three slugs that inherited a literal `nbsp` artifact from Squarespace (`caroline-lucas-interviewnbsp` → `caroline-lucas-interview`, same for the-wytches and traams).
+- Build verified clean: 39 pages, zero schema errors.
+
+### Known gap — needs resolving before mid-September
+
+All 20 images referenced in the migrated articles are still hotlinked to `images.squarespace-cdn.com` — this sandbox can't reach that domain (network egress restrictions), so downloads failed for every one. Each is marked with a `<!-- TODO -->` comment in its markdown file. **These will break once the Squarespace subscription lapses.** Options: James downloads them via his own browser (not sandboxed) and drops them somewhere I can pick up, or we revisit closer to the domain cutover. Listed here so it doesn't get missed.
+
+### Also flagged, not fixed
+
+- `my-dissertation.md` migrated with almost no body — the original Squarespace post was just a cover image, likely meant to link out to an actual dissertation PDF that was never captured in the export. Same pattern as the Research Dossier PDF link on Wasted On The Young; James has the actual file if he wants it added the same way.
+- Several articles' `date` reflects when they were added to Squarespace, not necessarily first publication (e.g. Caroline Lucas interview body text says "AUGUST 19, 2013" but `wp:post_date` was 2018). Left as-is; worth a look if publication dates matter for these.
+- `summary` fields are auto-generated from Squarespace excerpts and occasionally read a little rough (missing space where an HTML tag was stripped). Worth a skim via the CMS rather than trusting them as final.
+
 ## Done — 15 August 2026, later (first CMS-triggered build break, fixed)
 
 - James used the CMS for real: edited "All Under One Roof Raving" with the full essay body and an inline image. Confirmed the CMS → GitHub → Cloudflare pipeline works exactly as designed, no extra glue needed — the Writing page already reads the same files the CMS edits.

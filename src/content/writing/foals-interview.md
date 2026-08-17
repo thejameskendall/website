@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "This is Foals first ever cover story. Even then Yannis was an intense guy. I knew I had to go in with good questions, even though they were just one single in at the time. It was obvious from the get go that they were…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1545842583126-F6T6W2NOX8XP36L28EQF/foals_3.jpg?format=original)
+![](/images/writing/foals-interview/foals-interview.webp)
 
 **JUNE 11, 2007**
 

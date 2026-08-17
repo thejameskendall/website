@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "Loyal asked me to come on board to write all their press releases and biogs, and it’s been nice to get into their world for a little while. Here’s the biog.“Making classic soul that passes the US test means that when…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1571087265413-OI02YPQ1MDA6MZ5BCJJA/LOYAL_RED_1290_860.jpg?format=original)
+![](/images/writing/loyal-biog/loyal-biog.webp)
 
 The best music bridges gaps, and Loyal connect more communities than most – old disco with hyper-modern dance music; Radio 1-beloved pop with cutting edge indie Spotify playlists; studio geekery with banging live shows; heart on sleeve lyrics with high concept sci-fi stories... It makes sense that when the band formed they ruminated on the concept of ‘the ancient future’. If some bands didn’t exist you’d know exactly how to invent them, but Loyal sound like a band you’ve loved forever but can’t possibly imagine. 
 

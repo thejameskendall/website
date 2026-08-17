@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "AKDK make a lot of noise, but then the band is 100% drummers so what ya gonna do? This interview is from forever ago, before 6 Music fell in love with them.“It was krautrock legend Damo Suzuki who made us realise that…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1571088275670-Y25BFYBOZ9JILAITCHXW/akdk-alt.jpg?format=original)
+![](/images/writing/akdk-interview/akdk-interview.webp)
 
 It was krautrock legend Damo Suzuki who made us realise that the two synth-playing drummers known as AK/DK were Brighton’s best live band. If you’re a music geek you’ll know that the Can singer travels around the world performing with a hometown band every time he stops. The Brighton promoter thought that Ed Chivers and G Sowerby would be a good match and hooked them up for a gig at the Green Door Store. Joined by a bass player, they played a tight, blistering set of complex, noisy, leftfield electro rhythms with an ebb and flow of the most delicately programmed dance music. Obviously there was a nod to 70s German music, but this was all new – exciting and challenging but accessible and danceable. We were completely breathless. Having Damo Suzuki there seemed like the icing on the cake rather than the cake itself.
 

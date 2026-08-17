@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "Are you looking for 4000 words about ABBA covering only the period during which they were split? I got you there, with this feature for Classic Pop’s ABBA special issue.“Sure, ABBA sold a lot of records worldwide –…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/d59774d5-f729-46e4-bc0e-dcd824c6d022/best-deepcut-abba-songs-sheffield.jpg?format=original)
+![](/images/writing/abba-feature/abba-feature.webp)
 
 ABBA never split up. There was never an official announcement – no one really cared. But oh, wow, did they care when they announced their return. It was rightly reported as the second coming of pop-Jesus. Between 1982 when they slinked off and 2021 when they announced the new album and “tour” we’d wanted so desperately, they’d become pop royalty. How did things change so much for a band that had stopped making music? How did absence make our hearts grow so fond? And why did it take them such a long time to come back to our welcoming arms?
 

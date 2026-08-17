@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "I got super excited about Traams - they were amazing live and the first album was all I hoped it would be. This was their first cover story.“What makes the band so special is that they take a garagey style of punk and…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1545843617471-05IP2SCG3JA66BYLDCMS/traams-post.jpg?format=original)
+![](/images/writing/traams-interview/traams-interview.webp)
 
 **AUGUST 30, 2013**
 

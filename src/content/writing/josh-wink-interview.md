@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "Absolutely fascinating guy, and producer of some of my favourite house music. We went for a curry and chatted for hours.\"Some producers are in it for the money – and you can hear it a mile off – while some want the buzz…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/7b5ec245-6c3c-4d31-8fe4-b23c0dda41ac/PRESS-SHOT-Josh-Wink-2-1920x1460.jpg?format=original)
+![](/images/writing/josh-wink-interview/josh-wink-interview.webp)
 
 Making music isn’t easy. Sure, anyone can throw down a kick drum loop and some snares and call it a ‘tune’, but if you want to make a track that’s going to achieve something then you’re going to have to put in some work. After you’ve cut off you mates, lost your girlfriend, gone so pale the local smackheads give you a wide berth (and spent the last year torn between a sine wave and a square tooth wave), you’ve got to ask yourself why you are putting yourself through such head-mangling intensity.
 

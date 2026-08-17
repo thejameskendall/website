@@ -5,8 +5,7 @@ type: journalism
 draft: true
 summary: "Vice liked this article so much they invited Brighton Source to be part of the Vice Blog Network. I turned them down because one day Brighton Source will be bigger than Vice and Vice will be part of the Source Blog…"
 ---
-<!-- TODO: image failed to download, still on Squarespace -->
-![](https://images.squarespace-cdn.com/content/v1/57dbfc3debbd1a04788c2368/1545916900654-UORLDC4RF1I0431SLI90/dp-3.jpg?format=original)
+![](/images/writing/best-daft-punk-lost-classics/best-daft-punk-lost-classics.webp)
 
 So ‘Get Lucky’ is your favourite song of the year, you’ve bought the Daft Punk albums (and then taken ‘Human After All’ back to the shop to swap it for ‘Daft Club’), but where next? Here are six lesser-known tracks from Bangalter and Guy-Man from their early, arguably best, years.
 
