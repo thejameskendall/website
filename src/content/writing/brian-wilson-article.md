@@ -2,7 +2,7 @@
 title: "Brian Wilson Article"
 date: 2023-08-22
 type: journalism
-draft: true
+draft: false
 summary: "Together The People festival asked me to write a piece about Brian Wilson for their brochure. I used it as an excuse to talk about the start of a friendship which was soundtracked by The Beach Boys.“When he emerged from…"
 ---
 ![](/images/writing/brian-wilson-article/brian-wilson-article.webp)

@@ -2,7 +2,7 @@
 title: "Josh Wink Interview"
 date: 2023-10-12
 type: journalism
-draft: true
+draft: false
 summary: "Absolutely fascinating guy, and producer of some of my favourite house music. We went for a curry and chatted for hours.\"Some producers are in it for the money – and you can hear it a mile off – while some want the buzz…"
 ---
 ![](/images/writing/josh-wink-interview/josh-wink-interview.webp)

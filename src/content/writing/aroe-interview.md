@@ -2,7 +2,7 @@
 title: "Aroe Interview"
 date: 2019-06-22
 type: journalism
-draft: true
+draft: false
 summary: "Aroe Interview — migrated from the old site, summary to be written."
 ---
 **There was a white wall, and then 20 minutes later there was nine foot square piece of art. That’s all it took when Aroe painted the background of the SOURCE cover. Reaching into his stripped-down box of paint – he normally has a car boot full – he dove at the wall with astounding confidence, laying down big blocks of colour in seconds, the lines flowing straight from his brain to the wall, no sketches, no projectors and certainly no stencils. **

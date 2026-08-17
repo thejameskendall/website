@@ -2,7 +2,7 @@
 title: "Traams Interview"
 date: 2018-12-26
 type: journalism
-draft: true
+draft: false
 summary: "I got super excited about Traams - they were amazing live and the first album was all I hoped it would be. This was their first cover story.“What makes the band so special is that they take a garagey style of punk and…"
 ---
 ![](/images/writing/traams-interview/traams-interview.webp)

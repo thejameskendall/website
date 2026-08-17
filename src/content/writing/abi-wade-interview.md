@@ -2,7 +2,7 @@
 title: "Abi Wade Interview"
 date: 2019-06-22
 type: journalism
-draft: true
+draft: false
 summary: "Abi Wade Interview — migrated from the old site, summary to be written."
 ---
 If you want to succeed at something, make it your own – that’s what they say. Well, we’ve never seen anyone play the cello like Abi Wade. One of the classiest instruments you can pilfer from your school’s orchestra cupboard, Abi has forsaken the sophistication to, well, hit it with sticks. Yeah, fine, we hear you say, very art college, but this is all happening in swirls of rhythmic harmony while she plucks at the strings and sings beautiful, off kilter folk songs. As if that wasn’t enough she’s got a bass kick happening with one foot and a tambourine attached to the other. We’ve got no idea how she does it. And, it turns out, neither has she.

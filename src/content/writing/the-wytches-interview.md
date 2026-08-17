@@ -2,7 +2,7 @@
 title: "The Wytches Interview"
 date: 2018-12-26
 type: journalism
-draft: true
+draft: false
 summary: "The Wytches are one of the funnest bands I’ve ever interviewed. Opinionated and outrageous, even though one third of them was almost too hungover to speak.“From there, talk turns to a night in Lincoln that started with…"
 ---
 ![](/images/writing/the-wytches-interview/the-wytches-interview.webp)

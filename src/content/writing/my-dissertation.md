@@ -2,7 +2,7 @@
 title: "My Dissertation"
 date: 2026-05-21
 type: essay
-draft: true
+draft: false
 summary: "Here's my dissertation from my MA in Photography. An argument about beauty: when it pacifies, when it dignifies, and why the same country can produce both Boris Mikhailov's brutal Case History and Yelena Yemchuk's…"
 ---
 <!-- TODO: image failed to download, still on Squarespace -->

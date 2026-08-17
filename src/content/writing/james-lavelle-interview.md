@@ -2,7 +2,7 @@
 title: "James Lavelle Interview"
 date: 2019-06-17
 type: journalism
-draft: true
+draft: false
 summary: "I had a great night out with Mo Wax’s James Lavelle in Romania. I know he’s got a bit of a, er, reputation, but we got on like a house on fire. This report is from DJmag.“But the experience hasn’t been all plain…"
 ---
 ![](/images/writing/james-lavelle-interview/james-lavelle-interview.webp)

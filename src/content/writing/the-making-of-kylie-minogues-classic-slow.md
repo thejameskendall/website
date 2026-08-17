@@ -2,7 +2,7 @@
 title: "The Making Of Kylie Minogue's Classic 'Slow'"
 date: 2023-08-22
 type: journalism
-draft: true
+draft: false
 summary: "I interviewed writer/producer Emiliana Torrini about the making of Kylie’s stone cold pop classic ‘Slow’. Read a snippet here because it’s not out yet and you should go and buy the magazine when it is.“Ask any serious…"
 ---
 ![](/images/writing/the-making-of-kylie-minogues-classic-slow/the-making-of-kylie-minogues-classic-slow.webp)

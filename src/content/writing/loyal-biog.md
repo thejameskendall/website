@@ -2,7 +2,7 @@
 title: "Loyal Biog"
 date: 2019-10-14
 type: journalism
-draft: true
+draft: false
 summary: "Loyal asked me to come on board to write all their press releases and biogs, and it’s been nice to get into their world for a little while. Here’s the biog.“Making classic soul that passes the US test means that when…"
 ---
 ![](/images/writing/loyal-biog/loyal-biog.webp)

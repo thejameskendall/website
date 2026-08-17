@@ -2,7 +2,7 @@
 title: "Martin Rossiter Interview"
 date: 2019-06-18
 type: journalism
-draft: true
+draft: false
 summary: "Martin Rossiter is a world class interviewee - clever, witty, charming. From years as the frontman of Gene, he absolutely knows what makes a good interview, and helps you get it.“Sales might not come close to the…"
 ---
 ![](/images/writing/martin-rossiter-interview/martin-rossiter-interview.webp)

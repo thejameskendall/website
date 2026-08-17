@@ -2,7 +2,7 @@
 title: "ABBA Feature"
 date: 2023-08-22
 type: journalism
-draft: true
+draft: false
 summary: "Are you looking for 4000 words about ABBA covering only the period during which they were split? I got you there, with this feature for Classic Pop’s ABBA special issue.“Sure, ABBA sold a lot of records worldwide –…"
 ---
 ![](/images/writing/abba-feature/abba-feature.webp)

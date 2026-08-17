@@ -2,7 +2,7 @@
 title: "AK/DK Interview"
 date: 2019-10-14
 type: journalism
-draft: true
+draft: false
 summary: "AKDK make a lot of noise, but then the band is 100% drummers so what ya gonna do? This interview is from forever ago, before 6 Music fell in love with them.“It was krautrock legend Damo Suzuki who made us realise that…"
 ---
 ![](/images/writing/akdk-interview/akdk-interview.webp)

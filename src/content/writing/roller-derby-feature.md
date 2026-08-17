@@ -2,7 +2,7 @@
 title: "Roller Derby Feature"
 date: 2019-06-18
 type: journalism
-draft: true
+draft: false
 summary: "I got to train with Brighton’s roller derby team. Not many men can say that, and that’s why I love being a journalist.““I don’t think I’ve ever met anyone who’s gone to their first game and hasn’t said, ‘It was amazing…"
 ---
 ![](/images/writing/roller-derby-feature/roller-derby-feature.webp)

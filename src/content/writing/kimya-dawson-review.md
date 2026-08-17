@@ -2,7 +2,7 @@
 title: "Kimya Dawson Review"
 date: 2022-01-13
 type: journalism
-draft: true
+draft: false
 summary: "Kimya Dawson's gig knocked everyone who was there sideways. Even before she left the stage crying.“But after a bad joke interlude, an acoustic rap song and a mock operatic number with dance moves (about eating farts)…"
 ---
 ![](/images/writing/kimya-dawson-review/kimya-dawson-review-1.webp)
