@@ -12,11 +12,14 @@ Running log of what's done, what's next, decisions made. Updated each session.
 
 - Replaced the placeholder `my-dissertation.md` with the real essay content ("The Rejection, & Return, of Beauty in Representations of Ukraine"), pasted from James as a Squarespace code block. Retitled the piece (was "My Dissertation"), stripped the duplicate h1/byline (the page template already renders the title), converted all 30 footnote hover-tooltips into plain superscript anchors linking to a Notes section, kept the Notes and collapsible Bibliography as native HTML (`<ol>` / `<details>`), and rebuilt all of it with DS tokens (Anton/Archivo/Plex Mono, signal-red accent, hairline borders) instead of the original Squarespace CSS (Georgia serif, hardcoded hex, JS hover tooltips — the JS was also broken, empty forEach callbacks). No cover image supplied for this one, so it shows the same hairline placeholder box as the 3 other image-less articles. Build tested clean.
 
+- Fixed My Dissertation's date to 2022-09-01 (James confirmed written September 2022).
+- Rebuilt the homepage hero as a full-bleed autoplaying carousel — one slide per project + one per commercial section (11 total, interleaved), each tagged `[PROJECT]`/`[COMMERCIAL]` with its title and linking out to that section. Autoplay every 5.5s, permanently stops on first manual prev/next/arrow-key use, skips entirely if `prefers-reduced-motion`. Name/tagline sit in a flat dark panel overlaid top-right (no gradients/blur, per the DS's flat-poster rule); each slide's tag is a flat paper sticker bottom-left. Old poster hero (title lockup, single fixed image, NEW sticker) is gone; the standfirst paragraph and project grid stay below as before. Uses the same real-image-then-placeholder fallback the grid already used, so most slides are still Wasted On The Young placeholder crops until the other 5 projects and all 5 commercial sections get real photos.
+
 ### Still open
 
 - `coverImage` isn't in `public/admin/config.yml` yet, so it's not editable via the CMS UI. Add it once James wants to swap thumbnails himself.
 - Writing filter bar (type/publication tags) is static — no click-to-filter wired up yet.
-- My Dissertation's `date` (2026-05-21) is still just "when it was added to Squarespace" — the essay itself references 2022 events throughout, so the actual submission date is probably 2022 or 2023. Worth fixing if James wants it dated accurately.
+- Homepage carousel will look much better once real photos exist for the other 5 projects and any commercial section — right now 9 of 11 slides are placeholder crops of Wasted On The Young.
 
 ## Done — 17 August 2026 (Squarespace Writing migration)
 

@@ -1,6 +1,6 @@
 ---
 title: "The Rejection, & Return, of Beauty in Representations of Ukraine"
-date: 2026-05-21
+date: 2022-09-01
 type: essay
 draft: false
 summary: "MA dissertation. An argument about beauty in photographs of Ukraine: when it pacifies, when it dignifies, and why the same country produced both Boris Mikhailov's brutal Case History and Yelena Yemchuk's tender Odesa."

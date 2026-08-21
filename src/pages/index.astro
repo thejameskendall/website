@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MetaLine from '../components/ds/MetaLine.astro';
-import Sticker from '../components/ds/Sticker.astro';
 import PosterCard from '../components/ds/PosterCard.astro';
 import { getCollection } from 'astro:content';
 import { SHOW_DRAFTS } from '../lib/flags';
@@ -10,28 +9,75 @@ import { placeholderImage } from '../lib/placeholders';
 const projects = (await getCollection('projects', ({ data }) => SHOW_DRAFTS || !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
 
+const commercial = (await getCollection('commercial', ({ data }) => SHOW_DRAFTS || !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
 const count = `[${String(projects.length).padStart(2, '0')}]`;
+
+// Homepage hero: one slide per project + one per commercial section, tagged
+// and linked out. Real photos win where they exist (currently just Wasted On
+// The Young's gallery); everything else falls back to a placeholder crop —
+// same fallback the project grid below already uses. Interleaved so the
+// carousel doesn't run through all six projects before showing any commercial
+// work.
+const projectSlides = projects.map((p) => ({
+  href: `/projects/${p.id}`,
+  title: p.data.title,
+  kind: 'PROJECT',
+  image: p.data.images?.[0]?.src.src ?? p.data.coverImage ?? placeholderImage(p.id),
+}));
+
+const commercialSlides = commercial.map((c) => ({
+  href: `/commercial/${c.id}`,
+  title: c.data.title,
+  kind: 'COMMERCIAL',
+  image: c.data.coverImage ?? placeholderImage(c.id),
+}));
+
+const heroSlides: typeof projectSlides = [];
+const maxLen = Math.max(projectSlides.length, commercialSlides.length);
+for (let i = 0; i < maxLen; i++) {
+  if (projectSlides[i]) heroSlides.push(projectSlides[i]);
+  if (commercialSlides[i]) heroSlides.push(commercialSlides[i]);
+}
 ---
 
 <BaseLayout title="Home">
-  <!-- Poster hero — DS website kit pattern -->
-  <section class="hero page-pad">
-    <div class="hero-canvas">
-      <img
-        class="hero-image"
-        src="/images/woty/woty-02-gold-headpiece.png"
-        alt="Gold headpiece, from Wasted On The Young"
-      />
-      <h1 class="hero-title">
-        Collective<br /><span class="hero-indent">Joy,</span><br />Documented
-      </h1>
-      <p class="hero-credentials meta-micro">
-        Photographer — Writer<br />Music · Youth Culture · Age
-      </p>
-      <div class="hero-sticker">
-        <Sticker label="NEW">Wasted On The Young</Sticker>
+  <!-- Full-bleed hero carousel — every project + commercial section, tagged and linked -->
+  <section class="hero-carousel" data-hero-carousel>
+    <div class="hero-carousel-frame">
+      {heroSlides.map((slide, i) => (
+        <div class="hero-slide" hidden={i !== 0}>
+          <a href={slide.href} class="hero-slide-link">
+            <img
+              src={slide.image}
+              alt={slide.title}
+              loading={i === 0 ? 'eager' : 'lazy'}
+            />
+            <span class="hero-slide-tag">
+              <span class="meta-micro">{slide.kind}</span>
+              <span class="hero-slide-title">{slide.title} →</span>
+            </span>
+          </a>
+        </div>
+      ))}
+      <div class="hero-id-panel">
+        <p class="hero-id-name">James Kendall</p>
+        <p class="meta-micro">Photographer — Writer · Music · Youth Culture · Age</p>
       </div>
     </div>
+    {heroSlides.length > 1 && (
+      <div class="hero-carousel-controls page-pad">
+        <button type="button" class="hero-prev meta" aria-label="Previous">← PREV</button>
+        <span class="hero-count meta-micro">
+          <span class="hero-current">01</span> / {String(heroSlides.length).padStart(2, '0')}
+        </span>
+        <button type="button" class="hero-next meta" aria-label="Next">NEXT →</button>
+      </div>
+    )}
+  </section>
+
+  <section class="standfirst-block page-pad">
     <p class="hero-standfirst">
       Photography as a means of connection, and a suggestion of how you might
       connect to each other, and the world. Published by i-D, NME, the BBC and
@@ -54,56 +100,172 @@ const count = `[${String(projects.length).padStart(2, '0')}]`;
       />
     ))}
   </section>
+
+  {heroSlides.length > 1 && (
+    <script>
+      // Full-bleed hero carousel. Autoplay by default; any manual prev/next
+      // click (or arrow key) stops it permanently for that visit — once
+      // someone takes the wheel, we don't wrestle it back. Respects
+      // prefers-reduced-motion by not starting the timer at all.
+      const root = document.querySelector<HTMLElement>('[data-hero-carousel]');
+      if (root) {
+        const slides = Array.from(root.querySelectorAll<HTMLElement>('.hero-slide'));
+        const prevBtn = root.querySelector<HTMLButtonElement>('.hero-prev');
+        const nextBtn = root.querySelector<HTMLButtonElement>('.hero-next');
+        const counter = root.querySelector<HTMLElement>('.hero-current');
+        let current = 0;
+        let timer: ReturnType<typeof setInterval> | null = null;
+
+        function show(index: number) {
+          current = (index + slides.length) % slides.length;
+          slides.forEach((slide, i) => {
+            slide.hidden = i !== current;
+          });
+          if (counter) counter.textContent = String(current + 1).padStart(2, '0');
+        }
+
+        function stopAutoplay() {
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+          }
+        }
+
+        function goManual(delta: number) {
+          stopAutoplay();
+          show(current + delta);
+        }
+
+        prevBtn?.addEventListener('click', () => goManual(-1));
+        nextBtn?.addEventListener('click', () => goManual(1));
+        root.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') goManual(-1);
+          if (e.key === 'ArrowRight') goManual(1);
+        });
+
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!reduceMotion && slides.length > 1) {
+          timer = setInterval(() => show(current + 1), 5500);
+        }
+      }
+    </script>
+  )}
 </BaseLayout>
 
 <style>
-  .hero {
+  .hero-carousel {
     position: relative;
-    padding-top: var(--space-6);
-    padding-bottom: 56px;
+  }
+
+  .hero-carousel-frame {
+    position: relative;
+    width: 100%;
+    height: clamp(420px, 86vh, 940px);
     overflow: hidden;
   }
 
-  .hero-canvas {
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-slide-link {
+    display: block;
+    width: 100%;
+    height: 100%;
     position: relative;
   }
 
-  .hero-image {
-    position: absolute;
-    left: 50%;
-    top: 12px;
-    transform: translateX(-50%);
-    width: min(420px, 38vw);
-    aspect-ratio: 3 / 4;
+  .hero-slide-link img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 
-  .hero-title {
-    position: relative;
-    font-size: clamp(64px, 12.5vw, 190px);
-    mix-blend-mode: multiply;
-  }
-
-  .hero-indent {
-    margin-left: 0.8em;
-  }
-
-  .hero-credentials {
+  .hero-slide-tag {
     position: absolute;
-    right: 0;
-    top: 0;
+    left: var(--page-margin);
+    bottom: var(--space-5);
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    background: #fdfcf7;
+    color: var(--ink-1);
+    padding: 6px 12px;
+    box-shadow: var(--shadow-paper);
+  }
+
+  .hero-slide-tag .meta-micro {
+    color: var(--ink-3);
+  }
+
+  .hero-slide-title {
+    font-family: var(--font-grotesque);
+    font-weight: var(--weight-bold);
+    font-size: 15px;
+    text-transform: uppercase;
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .hero-slide-link:hover .hero-slide-title {
+    color: var(--signal-red);
+  }
+
+  .hero-id-panel {
+    position: absolute;
+    right: var(--page-margin);
+    top: var(--space-5);
+    background: var(--ink-1);
+    color: var(--ink-on-dark);
+    padding: var(--space-3) var(--space-4);
+    box-shadow: var(--shadow-paper);
     text-align: right;
   }
 
-  .hero-sticker {
-    position: absolute;
-    right: 8%;
-    bottom: -8px;
+  .hero-id-panel .meta-micro {
+    color: var(--ink-4);
+    margin-top: 2px;
+  }
+
+  .hero-id-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .hero-carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: var(--border-width-hairline) solid var(--border-hairline);
+    padding: var(--space-2) var(--page-margin);
+  }
+
+  .hero-prev,
+  .hero-next {
+    background: none;
+    border: none;
+    padding: var(--space-1) var(--space-2);
+    cursor: pointer;
+    color: var(--ink-1);
+  }
+
+  .hero-prev:hover,
+  .hero-next:hover {
+    color: var(--signal-red);
+  }
+
+  .hero-count {
+    color: var(--ink-3);
+  }
+
+  .standfirst-block {
+    padding-top: var(--space-6);
   }
 
   .hero-standfirst {
     max-width: 44ch;
-    margin-top: 36px;
     font-size: 17px;
     color: var(--text-body);
   }
@@ -122,8 +284,8 @@ const count = `[${String(projects.length).padStart(2, '0')}]`;
 
   @media (max-width: 640px) {
     .grid { grid-template-columns: 1fr; }
-    .hero-image { position: relative; left: 0; top: 0; transform: none; width: 100%; margin-bottom: var(--space-4); }
-    .hero-credentials { position: static; text-align: left; margin-top: var(--space-3); }
-    .hero-sticker { position: static; display: inline-block; margin-top: var(--space-4); }
+    .hero-carousel-frame { height: clamp(360px, 70vh, 640px); }
+    .hero-id-panel { left: var(--page-margin); right: var(--page-margin); text-align: left; }
+    .hero-slide-tag { right: var(--page-margin); left: var(--page-margin); }
   }
 </style>
