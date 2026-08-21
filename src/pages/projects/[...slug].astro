@@ -242,7 +242,8 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
        otherwise scale the image huge in absolute pixels, forcing far more
        scrolling than the photo warrants. */
     max-height: 82vh;
-    object-fit: cover;
+    object-fit: contain;
+    background: var(--paper-1);
   }
 
   .plate-sticker {
@@ -268,7 +269,8 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
     width: 100%;
     aspect-ratio: 4 / 3;
     max-height: 82vh;
-    object-fit: cover;
+    object-fit: contain;
+    background: var(--paper-1);
   }
 
   .carousel-controls {
