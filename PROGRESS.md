@@ -10,11 +10,13 @@ Running log of what's done, what's next, decisions made. Updated each session.
 - Made the Writing index page visual: each list entry now shows a 120px thumbnail (`entry-thumb`) next to the title/summary, pulled from `coverImage`. The 3 image-less articles get a plain hairline-bordered placeholder box instead of a broken image. Build tested clean (39 pages, no schema errors).
 - Explained the GitHub 500 "unicorn" error James hit generating a PAT — confirmed via search as a genuine GitHub-wide outage that day, not a config issue. No action needed, just retry later.
 
+- Replaced the placeholder `my-dissertation.md` with the real essay content ("The Rejection, & Return, of Beauty in Representations of Ukraine"), pasted from James as a Squarespace code block. Retitled the piece (was "My Dissertation"), stripped the duplicate h1/byline (the page template already renders the title), converted all 30 footnote hover-tooltips into plain superscript anchors linking to a Notes section, kept the Notes and collapsible Bibliography as native HTML (`<ol>` / `<details>`), and rebuilt all of it with DS tokens (Anton/Archivo/Plex Mono, signal-red accent, hairline borders) instead of the original Squarespace CSS (Georgia serif, hardcoded hex, JS hover tooltips — the JS was also broken, empty forEach callbacks). No cover image supplied for this one, so it shows the same hairline placeholder box as the 3 other image-less articles. Build tested clean.
+
 ### Still open
 
-- `my-dissertation.md`: still hotlinked to Squarespace, near-empty body. James said he'd follow up with details — not yet received.
 - `coverImage` isn't in `public/admin/config.yml` yet, so it's not editable via the CMS UI. Add it once James wants to swap thumbnails himself.
 - Writing filter bar (type/publication tags) is static — no click-to-filter wired up yet.
+- My Dissertation's `date` (2026-05-21) is still just "when it was added to Squarespace" — the essay itself references 2022 events throughout, so the actual submission date is probably 2022 or 2023. Worth fixing if James wants it dated accurately.
 
 ## Done — 17 August 2026 (Squarespace Writing migration)
 
