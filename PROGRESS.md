@@ -18,11 +18,13 @@ Running log of what's done, what's next, decisions made. Updated each session.
 - Removed the homepage carousel's name/tagline overlay panel (James wanted the image itself unobstructed). Slides now show image + tag only, controls unchanged.
 - My Dissertation: footnote numbers and their ↩ back-links now have `scroll-margin-top: 90px` so jumping to them lands below the sticky nav instead of underneath it. Bibliography changed from a click-to-expand `<details>` to a permanently visible section (same heading style as Notes, still with a hairline top border for separation).
 
+- Built out Unmade Beds with real content, same pattern as Wasted On The Young: 13 plates copied from `Website Content/Unmade Beds/` into `src/assets/images/unmade-beds/`, added to the `images[]` gallery (auto-carousel), captions following WOTY's "Untitled NN, [project], [years], 29mm x 38mm, Giclée print on [paper]" format with Hahnemühle Photorag per James's text. Summary and body copy taken from James's supplied text. No exhibition views or documents for this one yet. Left `draft: true`, matching WOTY's own still-draft state. Build tested clean, real photos confirmed rendering (no placeholder sticker).
+
 ### Still open
 
 - `coverImage` isn't in `public/admin/config.yml` yet, so it's not editable via the CMS UI. Add it once James wants to swap thumbnails himself.
 - Writing filter bar (type/publication tags) is static — no click-to-filter wired up yet.
-- Homepage carousel will look much better once real photos exist for the other 5 projects and any commercial section — right now 9 of 11 slides are placeholder crops of Wasted On The Young.
+- Homepage carousel will look much better once real photos exist for the other 4 remaining projects and any commercial section — Unmade Beds is now real, but Best Before, First Dance, Made Beds and Much Like Unrequited Love are still placeholder crops of Wasted On The Young.
 
 ## Done — 17 August 2026 (Squarespace Writing migration)
 
