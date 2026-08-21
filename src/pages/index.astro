@@ -167,6 +167,7 @@ for (let i = 0; i < maxLen; i++) {
     width: 100%;
     height: clamp(420px, 80vh, 900px);
     overflow: hidden;
+    background: var(--paper-1);
   }
 
   .hero-slide {
@@ -174,18 +175,29 @@ for (let i = 0; i < maxLen; i++) {
     inset: 0;
   }
 
+  /* :not([hidden]) rather than a bare .hero-slide rule — author CSS on
+     `display` overrides the browser's own `[hidden] { display: none }` rule
+     regardless of specificity, so setting display unconditionally here would
+     make every slide show at once. */
+  .hero-slide:not([hidden]) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .hero-slide-link {
-    display: block;
-    width: 100%;
-    height: 100%;
     position: relative;
+    display: inline-block;
+    max-width: 100%;
+    line-height: 0;
   }
 
   .hero-slide-link img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: var(--paper-1);
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: clamp(420px, 80vh, 900px);
   }
 
   .hero-slide-tag {
@@ -268,6 +280,7 @@ for (let i = 0; i < maxLen; i++) {
   @media (max-width: 640px) {
     .grid { grid-template-columns: 1fr; }
     .hero-carousel-frame { height: clamp(360px, 70vh, 640px); }
+    .hero-slide-link img { max-height: clamp(360px, 70vh, 640px); }
     .hero-slide-tag { right: var(--page-margin); left: var(--page-margin); }
   }
 </style>

@@ -83,11 +83,14 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
                   loading={i === 0 ? 'eager' : 'lazy'}
                   style={img.focus ? `object-position: ${img.focus}` : undefined}
                 />
+                <figcaption class="caption carousel-caption">
+                  {img.caption ?? `${project.data.title}, ${project.data.years}.`}
+                </figcaption>
               </figure>
             ))}
           </div>
           {carouselImages.length > 1 && (
-            <div class="carousel-controls page-pad">
+            <div class="carousel-controls">
               <button type="button" class="carousel-prev meta" aria-label="Previous image">← PREV</button>
               <span class="carousel-count meta-micro">
                 <span class="carousel-current">01</span> / {String(carouselImages.length).padStart(2, '0')}
@@ -95,25 +98,20 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
               <button type="button" class="carousel-next meta" aria-label="Next image">NEXT →</button>
             </div>
           )}
-          <p class="caption carousel-caption page-pad">
-            {carouselImages.map((img, i) => (
-              <span class="carousel-caption-text" hidden={i !== 0}>
-                {img.caption ?? `${project.data.title}, ${project.data.years}.`}
-              </span>
-            ))}
-          </p>
         </div>
       ) : (
         <figure class="plate">
-          <img src={placeholderSrc} alt={`From ${project.data.title}`} />
-          {usingPlaceholder && (
-            <div class="plate-sticker page-pad">
-              <Sticker rotate={2} label="TEMP">PLACEHOLDER</Sticker>
-            </div>
-          )}
-          <figcaption class="caption page-pad">
-            {project.data.title}, {project.data.years}.
-          </figcaption>
+          <div class="plate-inner">
+            <img src={placeholderSrc} alt={`From ${project.data.title}`} />
+            {usingPlaceholder && (
+              <div class="plate-sticker">
+                <Sticker rotate={2} label="TEMP">PLACEHOLDER</Sticker>
+              </div>
+            )}
+            <figcaption class="caption plate-caption">
+              {project.data.title}, {project.data.years}.
+            </figcaption>
+          </div>
         </figure>
       )}
     </section>
@@ -168,7 +166,6 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
     // matches the poster system's static, editorial feel.
     document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
       const slides = Array.from(root.querySelectorAll<HTMLElement>('.carousel-slide'));
-      const captions = Array.from(root.querySelectorAll<HTMLElement>('.carousel-caption-text'));
       const prevBtn = root.querySelector<HTMLButtonElement>('.carousel-prev');
       const nextBtn = root.querySelector<HTMLButtonElement>('.carousel-next');
       const counter = root.querySelector<HTMLElement>('.carousel-current');
@@ -178,9 +175,6 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
         current = (index + slides.length) % slides.length;
         slides.forEach((slide, i) => {
           slide.hidden = i !== current;
-        });
-        captions.forEach((caption, i) => {
-          caption.hidden = i !== current;
         });
         if (counter) counter.textContent = String(current + 1).padStart(2, '0');
       }
@@ -230,27 +224,49 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
     padding-bottom: var(--space-6);
   }
 
+  /* Both the placeholder plate and the real carousel follow the same
+     pattern: a full-bleed outer box centres a shrink-wrapped inner group
+     (image + caption, left-aligned to each other) sized to the image's own
+     rendered dimensions — not a fixed box. With object-fit: contain removed
+     in favour of intrinsic sizing, this is what keeps the caption's left
+     edge lined up with the photo above it instead of the caption spanning
+     the full page width regardless of how the image actually renders. */
+
   .plate {
     position: relative;
     margin: 0;
+    display: flex;
+    justify-content: center;
   }
 
-  .plate img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    /* Caps how tall the box can get on very wide screens — 4:3 alone would
-       otherwise scale the image huge in absolute pixels, forcing far more
-       scrolling than the photo warrants. */
+  .plate-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 100%;
+  }
+
+  .plate-inner img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    /* Caps how tall the image can get on very wide screens. */
     max-height: 82vh;
-    object-fit: contain;
     background: var(--paper-1);
   }
 
   .plate-sticker {
     position: absolute;
-    right: var(--page-margin);
-    top: 18px;
+    right: var(--space-4);
+    top: var(--space-4);
     padding: 0 !important;
+  }
+
+  .plate-caption {
+    padding: 0 var(--page-margin);
+    margin-top: var(--space-2);
   }
 
   .carousel {
@@ -259,18 +275,34 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
 
   .carousel-frame {
     position: relative;
+    display: flex;
+    justify-content: center;
   }
 
-  .carousel-slide {
+  /* :not([hidden]) rather than a bare rule — author CSS on `display`
+     overrides the browser's own `[hidden] { display: none }` regardless of
+     specificity, so setting it unconditionally would show every slide
+     at once. */
+  .carousel-slide:not([hidden]) {
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 100%;
   }
 
   .carousel-slide :global(img) {
-    width: 100%;
-    aspect-ratio: 4 / 3;
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
     max-height: 82vh;
-    object-fit: contain;
     background: var(--paper-1);
+  }
+
+  .carousel-caption {
+    padding: 0 var(--page-margin);
+    margin-top: var(--space-2);
   }
 
   .carousel-controls {
@@ -278,9 +310,13 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: var(--space-4);
+    width: fit-content;
+    max-width: calc(100% - var(--page-margin) * 2);
+    margin-inline: auto;
     border-top: var(--border-width-hairline) solid var(--border-hairline);
     border-bottom: var(--border-width-hairline) solid var(--border-hairline);
-    padding: var(--space-2) 0;
+    padding: var(--space-2) var(--space-4);
   }
 
   .carousel-prev,
@@ -299,10 +335,6 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
 
   .carousel-count {
     color: var(--ink-3);
-  }
-
-  .carousel-caption {
-    margin-top: var(--space-2);
   }
 
   .side-block {
