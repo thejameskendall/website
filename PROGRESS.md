@@ -15,6 +15,9 @@ Running log of what's done, what's next, decisions made. Updated each session.
 - Fixed My Dissertation's date to 2022-09-01 (James confirmed written September 2022).
 - Rebuilt the homepage hero as a full-bleed autoplaying carousel — one slide per project + one per commercial section (11 total, interleaved), each tagged `[PROJECT]`/`[COMMERCIAL]` with its title and linking out to that section. Autoplay every 5.5s, permanently stops on first manual prev/next/arrow-key use, skips entirely if `prefers-reduced-motion`. Name/tagline sit in a flat dark panel overlaid top-right (no gradients/blur, per the DS's flat-poster rule); each slide's tag is a flat paper sticker bottom-left. Old poster hero (title lockup, single fixed image, NEW sticker) is gone; the standfirst paragraph and project grid stay below as before. Uses the same real-image-then-placeholder fallback the grid already used, so most slides are still Wasted On The Young placeholder crops until the other 5 projects and all 5 commercial sections get real photos.
 
+- Removed the homepage carousel's name/tagline overlay panel (James wanted the image itself unobstructed). Slides now show image + tag only, controls unchanged.
+- My Dissertation: footnote numbers and their ↩ back-links now have `scroll-margin-top: 90px` so jumping to them lands below the sticky nav instead of underneath it. Bibliography changed from a click-to-expand `<details>` to a permanently visible section (same heading style as Notes, still with a hairline top border for separation).
+
 ### Still open
 
 - `coverImage` isn't in `public/admin/config.yml` yet, so it's not editable via the CMS UI. Add it once James wants to swap thumbnails himself.

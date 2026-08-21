@@ -70,8 +70,8 @@ summary: "MA dissertation. An argument about beauty in photographs of Ukraine: w
       <li id="fn30">Talking at <i>Seeing Ukraine</i> event at the New York Library (2022). <a href="#ref30">↩</a></li>
     </ol>
   </section>
-  <details>
-    <summary>Bibliography</summary>
+  <section class="bibliography-block">
+    <h3>Bibliography</h3>
     <div class="bibliography">
       <p>Adams, R. (1989). <i>Beauty in Photography: Essays in defense of traditional values.</i> Aperture.</p>
       <p>Adorno, T. W. (1970). <i>Aesthetic Theory.</i> A&amp;C Black.</p>
@@ -156,7 +156,7 @@ summary: "MA dissertation. An argument about beauty in photographs of Ukraine: w
       <p>Williams, G. (2001). <i>Boris Mikhailov.</i> Phaidon Press Limited.</p>
       <p>Yemchuk, Y. (2010). <i>Gidropark. Ediz. Inglese.</i> Damiani Editore.</p>
     </div>
-  </details>
+  </section>
 
 </div>
 
@@ -202,6 +202,7 @@ summary: "MA dissertation. An argument about beauty in photographs of Ukraine: w
     color: var(--signal-red);
     text-decoration: none;
     padding: 0 1px;
+    scroll-margin-top: 90px;
   }
 
   .essay .footnote a:hover {
@@ -231,40 +232,25 @@ summary: "MA dissertation. An argument about beauty in photographs of Ukraine: w
 
   .essay .notes-block li {
     margin-bottom: var(--space-3);
+    scroll-margin-top: 90px;
   }
 
   .essay .notes-block li a {
     color: var(--signal-red);
   }
 
-  .essay details {
+  .essay .bibliography-block {
     margin-top: var(--space-6);
+    padding-top: var(--space-3);
+    border-top: var(--border-width-hairline) solid var(--border-hairline);
   }
 
-  .essay details summary {
-    cursor: pointer;
-    list-style: none;
+  .essay .bibliography-block h3 {
     font-family: var(--font-mono);
     font-size: var(--type-micro);
     letter-spacing: var(--tracking-micro);
     text-transform: uppercase;
-    color: var(--ink-1);
-    padding: var(--space-3) 0;
-    border-top: var(--border-width-hairline) solid var(--border-hairline);
-    border-bottom: var(--border-width-hairline) solid var(--border-hairline);
-  }
-
-  .essay details summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .essay details summary::before {
-    content: "+ ";
-    color: var(--signal-red);
-  }
-
-  .essay details[open] summary::before {
-    content: "\2212 ";
+    color: var(--ink-3);
   }
 
   .essay .bibliography {

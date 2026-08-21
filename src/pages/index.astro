@@ -61,10 +61,6 @@ for (let i = 0; i < maxLen; i++) {
           </a>
         </div>
       ))}
-      <div class="hero-id-panel">
-        <p class="hero-id-name">James Kendall</p>
-        <p class="meta-micro">Photographer — Writer · Music · Youth Culture · Age</p>
-      </div>
     </div>
     {heroSlides.length > 1 && (
       <div class="hero-carousel-controls page-pad">
@@ -211,29 +207,6 @@ for (let i = 0; i < maxLen; i++) {
     color: var(--signal-red);
   }
 
-  .hero-id-panel {
-    position: absolute;
-    right: var(--page-margin);
-    top: var(--space-5);
-    background: var(--ink-1);
-    color: var(--ink-on-dark);
-    padding: var(--space-3) var(--space-4);
-    box-shadow: var(--shadow-paper);
-    text-align: right;
-  }
-
-  .hero-id-panel .meta-micro {
-    color: var(--ink-4);
-    margin-top: 2px;
-  }
-
-  .hero-id-name {
-    font-family: var(--font-display);
-    font-size: 22px;
-    text-transform: uppercase;
-    line-height: 1;
-  }
-
   .hero-carousel-controls {
     display: flex;
     align-items: center;
@@ -285,7 +258,6 @@ for (let i = 0; i < maxLen; i++) {
   @media (max-width: 640px) {
     .grid { grid-template-columns: 1fr; }
     .hero-carousel-frame { height: clamp(360px, 70vh, 640px); }
-    .hero-id-panel { left: var(--page-margin); right: var(--page-margin); text-align: left; }
     .hero-slide-tag { right: var(--page-margin); left: var(--page-margin); }
   }
 </style>
