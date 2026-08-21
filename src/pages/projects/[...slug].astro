@@ -81,6 +81,7 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
                   width={1500}
                   height={1125}
                   loading={i === 0 ? 'eager' : 'lazy'}
+                  style={img.focus ? `object-position: ${img.focus}` : undefined}
                 />
               </figure>
             ))}
@@ -237,6 +238,10 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
   .plate img {
     width: 100%;
     aspect-ratio: 4 / 3;
+    /* Caps how tall the box can get on very wide screens — 4:3 alone would
+       otherwise scale the image huge in absolute pixels, forcing far more
+       scrolling than the photo warrants. */
+    max-height: 82vh;
     object-fit: cover;
   }
 
@@ -262,6 +267,7 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
   .carousel-slide :global(img) {
     width: 100%;
     aspect-ratio: 4 / 3;
+    max-height: 82vh;
     object-fit: cover;
   }
 

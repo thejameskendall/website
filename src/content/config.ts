@@ -15,6 +15,7 @@ const projects = defineCollection({
           z.object({
             src: image(),
             caption: z.string().optional(),
+            focus: z.string().optional(), // CSS object-position, e.g. "center top" or "50% 20%" — nudges the crop when centre-cropping cuts off the subject
           })
         )
         .optional(), // real plate sequence, sharp-optimised via astro:assets
@@ -23,6 +24,7 @@ const projects = defineCollection({
           z.object({
             src: image(),
             caption: z.string().optional(),
+            focus: z.string().optional(),
           })
         )
         .optional(),

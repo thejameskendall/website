@@ -25,6 +25,7 @@ const projectSlides = projects.map((p) => ({
   title: p.data.title,
   kind: 'PROJECT',
   image: p.data.images?.[0]?.src.src ?? p.data.coverImage ?? placeholderImage(p.id),
+  focus: p.data.images?.[0]?.focus,
 }));
 
 const commercialSlides = commercial.map((c) => ({
@@ -32,6 +33,7 @@ const commercialSlides = commercial.map((c) => ({
   title: c.data.title,
   kind: 'COMMERCIAL',
   image: c.data.coverImage ?? placeholderImage(c.id),
+  focus: undefined as string | undefined,
 }));
 
 const heroSlides: typeof projectSlides = [];
@@ -53,6 +55,7 @@ for (let i = 0; i < maxLen; i++) {
               src={slide.image}
               alt={slide.title}
               loading={i === 0 ? 'eager' : 'lazy'}
+              style={slide.focus ? `object-position: ${slide.focus}` : undefined}
             />
             <span class="hero-slide-tag">
               <span class="meta-micro">{slide.kind}</span>
@@ -162,7 +165,13 @@ for (let i = 0; i < maxLen; i++) {
   .hero-carousel-frame {
     position: relative;
     width: 100%;
-    height: clamp(420px, 86vh, 940px);
+    /* Height normally tracks viewport height (420-940px), but on a wide
+       monitor that alone makes the box far wider than it is tall, forcing
+       object-fit: cover to crop hard off the top and bottom. The max() with
+       56.25vw stops the box getting shorter than a 16:9 ratio relative to
+       its own width; the outer min() with 1100px stops it growing into an
+       oversized hero on very wide/ultrawide screens once that floor kicks in. */
+    height: min(max(clamp(420px, 86vh, 940px), 56.25vw), 1100px);
     overflow: hidden;
   }
 
