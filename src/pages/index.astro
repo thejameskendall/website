@@ -134,7 +134,13 @@ for (let i = 0; i < maxLen; i++) {
 
         prevBtn?.addEventListener('click', () => goManual(-1));
         nextBtn?.addEventListener('click', () => goManual(1));
-        root.addEventListener('keydown', (e) => {
+
+        // Listen on the whole document so arrow keys work as soon as you
+        // land on the homepage, no click into the carousel required. Skipped
+        // while focus is in a form field.
+        document.addEventListener('keydown', (e) => {
+          const tag = (document.activeElement?.tagName ?? '').toLowerCase();
+          if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
           if (e.key === 'ArrowLeft') goManual(-1);
           if (e.key === 'ArrowRight') goManual(1);
         });

@@ -4,6 +4,8 @@ Running log of what's done, what's next, decisions made. Updated each session.
 
 ## Done — 21 August 2026
 
+- Arrow-key navigation on both carousels (project galleries, homepage hero) now listens on the whole document instead of just the carousel element — works the moment you land on the page, no need to click into the carousel first. Skips while focus is in a form field. Build tested, confirmed present in both the homepage and a project page's bundled script.
+
 - Rehosted the 20 downloadable images from `Website Content/WRITING PAGE IMAGES/` into `public/images/writing/<slug>/`, replacing the `<!-- TODO -->` Squarespace hotlinks with local `.webp` paths across the migrated articles. `my-dissertation.md` still hotlinks to Squarespace (no screenshot supplied yet — see below).
 - Set all 23 Writing articles from `draft: true` to `draft: false` (James's "set them all to published" call).
 - Added `coverImage` to the `writing` schema and backfilled it on 20/23 articles (first image found in the body). `abi-wade-interview.md`, `aroe-interview.md`, `orbital-interview.md` have no images at all, so no `coverImage`.

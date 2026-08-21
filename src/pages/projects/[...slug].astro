@@ -186,7 +186,14 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
 
       prevBtn?.addEventListener('click', () => show(current - 1));
       nextBtn?.addEventListener('click', () => show(current + 1));
-      root.addEventListener('keydown', (e) => {
+
+      // Listen on the whole document, not just the carousel, so arrow keys
+      // work as soon as you land on the page — no need to click into the
+      // gallery first. One carousel per project page, so no ambiguity about
+      // which one's listening. Skipped while focus is in a form field.
+      document.addEventListener('keydown', (e) => {
+        const tag = (document.activeElement?.tagName ?? '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
         if (e.key === 'ArrowLeft') show(current - 1);
         if (e.key === 'ArrowRight') show(current + 1);
       });
