@@ -38,6 +38,7 @@ const projects = defineCollection({
         )
         .optional(), // supplementary PDFs (research dossiers etc.), listed alongside Related Writing, open in a new tab
       relatedWriting: z.array(z.string()).optional(), // slugs of writing pieces
+      companionProject: z.string().optional(), // slug of a paired/companion project, e.g. Made Beds <-> Unmade Beds
       draft: z.boolean().default(false),
     }),
 });

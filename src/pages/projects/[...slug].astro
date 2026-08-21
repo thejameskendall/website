@@ -40,6 +40,14 @@ const relatedWriting = (project.data.relatedWriting ?? [])
   .filter(Boolean);
 const documents = project.data.documents ?? [];
 
+// Companion project — a paired project that links back the other way too
+// (e.g. Made Beds <-> Unmade Beds), set per-project in frontmatter.
+const companion = project.data.companionProject
+  ? (await getCollection('projects', ({ data }) => SHOW_DRAFTS || !data.draft)).find(
+      (p) => p.id === project.data.companionProject
+    )
+  : null;
+
 // Related strip: same-collection siblings, v1 rule
 const siblings = (await getCollection('projects', ({ data }) => SHOW_DRAFTS || !data.draft))
   .filter((p) => p.id !== project.id)
@@ -123,6 +131,15 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
       <Content />
     </div>
   </section>
+
+  {companion && (
+    <section class="page-pad companion-block">
+      <MetaLine border="both" items={['COMPANION PROJECT', companion.data.years]} />
+      <p class="companion-link">
+        <a href={`/projects/${companion.id}`}>{companion.data.title}</a>
+      </p>
+    </section>
+  )}
 
   {(relatedWriting.length > 0 || documents.length > 0) && (
     <section class="page-pad writing-block">
@@ -335,6 +352,25 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
 
   .carousel-count {
     color: var(--ink-3);
+  }
+
+  .companion-block {
+    margin-top: var(--space-7);
+  }
+
+  .companion-link {
+    margin-top: var(--space-3);
+  }
+
+  .companion-link a {
+    font-family: var(--font-display);
+    font-size: 28px;
+    text-transform: uppercase;
+    color: var(--ink-1);
+  }
+
+  .companion-link a:hover {
+    color: var(--signal-red);
   }
 
   .side-block {

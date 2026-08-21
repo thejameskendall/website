@@ -4,6 +4,7 @@ years: 2021–2022
 order: 3
 summary: An investigation of rewilding, control and beauty through my own attempt to reconnect with nature.
 draft: true
+companionProject: made-beds
 images:
   - src: ../../assets/images/unmade-beds/1.webp
     caption: Untitled 01, Unmade Beds, 2021–2022, 29mm x 38mm, Giclée print on Hahnemühle Photorag
