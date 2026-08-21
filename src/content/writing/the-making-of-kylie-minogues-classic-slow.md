@@ -4,6 +4,7 @@ date: 2023-08-22
 type: journalism
 draft: false
 summary: "I interviewed writer/producer Emiliana Torrini about the making of Kylie’s stone cold pop classic ‘Slow’. Read a snippet here because it’s not out yet and you should go and buy the magazine when it is.“Ask any serious…"
+coverImage: /images/writing/the-making-of-kylie-minogues-classic-slow/the-making-of-kylie-minogues-classic-slow.webp
 ---
 ![](/images/writing/the-making-of-kylie-minogues-classic-slow/the-making-of-kylie-minogues-classic-slow.webp)
 

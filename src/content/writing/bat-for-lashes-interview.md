@@ -4,6 +4,7 @@ date: 2019-06-18
 type: journalism
 draft: false
 summary: "Within about five minutes of Bat For Lashes first single arriving on my desk I was on the phone to get her on the cover, her first. This was the final of three times I interviewed her - a Q&A but she was on good…"
+coverImage: /images/writing/bat-for-lashes-interview/bat-for-lashes-interview.webp
 ---
 ![](/images/writing/bat-for-lashes-interview/bat-for-lashes-interview.webp)
 

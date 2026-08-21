@@ -4,6 +4,7 @@ date: 2019-06-18
 type: journalism
 draft: false
 summary: "Sea Power are Brighton legends. I put them on the cover three times and this was the final time, while they were still called British Sea Power, I interviewed them for their brilliant ‘Machineries Of Joy’.“The whole…"
+coverImage: /images/writing/british-sea-power-interview/british-sea-power-interview.webp
 ---
 ![](/images/writing/british-sea-power-interview/british-sea-power-interview.webp)
 

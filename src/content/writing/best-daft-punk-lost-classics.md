@@ -4,6 +4,7 @@ date: 2018-12-27
 type: journalism
 draft: false
 summary: "Vice liked this article so much they invited Brighton Source to be part of the Vice Blog Network. I turned them down because one day Brighton Source will be bigger than Vice and Vice will be part of the Source Blog…"
+coverImage: /images/writing/best-daft-punk-lost-classics/best-daft-punk-lost-classics.webp
 ---
 ![](/images/writing/best-daft-punk-lost-classics/best-daft-punk-lost-classics.webp)
 

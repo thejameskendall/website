@@ -2,6 +2,20 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 21 August 2026
+
+- Rehosted the 20 downloadable images from `Website Content/WRITING PAGE IMAGES/` into `public/images/writing/<slug>/`, replacing the `<!-- TODO -->` Squarespace hotlinks with local `.webp` paths across the migrated articles. `my-dissertation.md` still hotlinks to Squarespace (no screenshot supplied yet — see below).
+- Set all 23 Writing articles from `draft: true` to `draft: false` (James's "set them all to published" call).
+- Added `coverImage` to the `writing` schema and backfilled it on 20/23 articles (first image found in the body). `abi-wade-interview.md`, `aroe-interview.md`, `orbital-interview.md` have no images at all, so no `coverImage`.
+- Made the Writing index page visual: each list entry now shows a 120px thumbnail (`entry-thumb`) next to the title/summary, pulled from `coverImage`. The 3 image-less articles get a plain hairline-bordered placeholder box instead of a broken image. Build tested clean (39 pages, no schema errors).
+- Explained the GitHub 500 "unicorn" error James hit generating a PAT — confirmed via search as a genuine GitHub-wide outage that day, not a config issue. No action needed, just retry later.
+
+### Still open
+
+- `my-dissertation.md`: still hotlinked to Squarespace, near-empty body. James said he'd follow up with details — not yet received.
+- `coverImage` isn't in `public/admin/config.yml` yet, so it's not editable via the CMS UI. Add it once James wants to swap thumbnails himself.
+- Writing filter bar (type/publication tags) is static — no click-to-filter wired up yet.
+
 ## Done — 17 August 2026 (Squarespace Writing migration)
 
 - James uploaded a fresh export (`Squarespace-Wordpress-Export-08-17-2026.xml`). Found three content buckets inside: `writing` (23 items, matches the site's IA directly), `blog` (42 older items, different old URL, not currently part of the IA), `blog-forte` (4 items + several `-forte` pages, unrelated leftover from a different old project).

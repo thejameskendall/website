@@ -7,6 +7,7 @@ externalUrl: ''
 relatedProject: wasted-on-the-young
 summary: The essay that accompanies the Wasted On The Young photos. A personal piece about a relationship with dancing.
 draft: false
+coverImage: /images/writing/Screenshot%2B2024-09-11%2Bat%2B21.00.35.png.webp
 ---
 
 ![](/images/writing/Screenshot%2B2024-09-11%2Bat%2B21.00.35.png.webp)

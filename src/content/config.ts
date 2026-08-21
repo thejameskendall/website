@@ -67,6 +67,7 @@ const writing = defineCollection({
     externalUrl: z.preprocess(blankToUndefined, z.string().url().optional()), // if outbound-only
     relatedProject: z.string().optional(), // slug of related project
     summary: z.string(),
+    coverImage: z.string().optional(), // shown on the Writing index; plain path/URL, not sharp-processed
     draft: z.boolean().default(false),
   }),
 });

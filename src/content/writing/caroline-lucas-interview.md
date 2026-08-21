@@ -4,6 +4,7 @@ date: 2018-12-26
 type: journalism
 draft: false
 summary: "It’s not always musicians, sometimes I interview real people. Caroline Lucas is super real.“Can normal folk even get the government to listen to us?It’s really important for people to think that their voices can be…"
+coverImage: /images/writing/caroline-lucas-interview/caroline-lucas-interview.webp
 ---
 ![](/images/writing/caroline-lucas-interview/caroline-lucas-interview.webp)
 

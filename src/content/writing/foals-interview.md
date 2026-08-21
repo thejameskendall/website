@@ -4,6 +4,7 @@ date: 2019-06-19
 type: journalism
 draft: false
 summary: "This is Foals first ever cover story. Even then Yannis was an intense guy. I knew I had to go in with good questions, even though they were just one single in at the time. It was obvious from the get go that they were…"
+coverImage: /images/writing/foals-interview/foals-interview.webp
 ---
 ![](/images/writing/foals-interview/foals-interview.webp)
 

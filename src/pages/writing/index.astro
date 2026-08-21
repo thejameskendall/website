@@ -41,14 +41,23 @@ const publications = [...new Set(posts.map((p) => p.data.publication).filter(Boo
     <ul class="list page-pad">
       {posts.map((p) => (
         <li>
-          <a href={p.data.externalUrl ?? `/writing/${p.id}`}>
-            <span class="meta-micro entry-meta">
-              {catalogueDate(p.data.date)}
-              {p.data.publication ? ` · ${p.data.publication.toUpperCase()}` : ''}
-              {p.data.draft ? ' · DRAFT' : ''}
+          <a href={p.data.externalUrl ?? `/writing/${p.id}`} class="entry">
+            {p.data.coverImage ? (
+              <span class="entry-thumb">
+                <img src={p.data.coverImage} alt="" loading="lazy" />
+              </span>
+            ) : (
+              <span class="entry-thumb entry-thumb--empty" aria-hidden="true"></span>
+            )}
+            <span class="entry-body">
+              <span class="meta-micro entry-meta">
+                {catalogueDate(p.data.date)}
+                {p.data.publication ? ` · ${p.data.publication.toUpperCase()}` : ''}
+                {p.data.draft ? ' · DRAFT' : ''}
+              </span>
+              <span class="entry-title">{p.data.title}</span>
+              <span class="entry-summary">{p.data.summary}</span>
             </span>
-            <span class="entry-title">{p.data.title}</span>
-            <span class="entry-summary">{p.data.summary}</span>
           </a>
         </li>
       ))}
@@ -78,11 +87,42 @@ const publications = [...new Set(posts.map((p) => p.data.publication).filter(Boo
     gap: var(--space-6);
   }
 
-  .list a {
+  .entry {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-5);
+  }
+
+  .entry-thumb {
+    flex: 0 0 auto;
+    width: 120px;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--paper-2);
+  }
+
+  .entry-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .entry:hover .entry-thumb img {
+    transform: scale(1.04);
+  }
+
+  .entry-thumb--empty {
+    border: var(--border-width-hairline) solid var(--border-hairline);
+  }
+
+  .entry-body {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
     max-width: 72ch;
+    min-width: 0;
   }
 
   .entry-title {
@@ -94,13 +134,19 @@ const publications = [...new Set(posts.map((p) => p.data.publication).filter(Boo
     transition: color var(--duration-fast) var(--ease-out);
   }
 
-  .list a:hover .entry-title {
+  .entry:hover .entry-title {
     color: var(--signal-red);
   }
 
   .entry-summary {
     color: var(--text-body);
     max-width: 56ch;
+  }
+
+  @media (max-width: 560px) {
+    .entry-thumb {
+      width: 84px;
+    }
   }
 
   .empty {
