@@ -1,0 +1,160 @@
+---
+/*
+  Shared full-width, manually-advanced image carousel. Used by project pages
+  and commercial category pages. No cropping — the box shrink-wraps to each
+  image's own rendered size (not a fixed aspect-ratio box), so the caption
+  underneath always lines up with the actual photo edges rather than a wider
+  or narrower placeholder box. No autoplay, by design — matches the poster
+  system's static, editorial feel (the homepage hero is the one exception,
+  and has its own separate carousel for that reason).
+*/
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface CarouselImage {
+  src: ImageMetadata;
+  caption?: string;
+  focus?: string;
+}
+
+interface Props {
+  images: CarouselImage[];
+  fallbackCaption?: string; // shown when an individual image has no caption of its own
+}
+
+const { images, fallbackCaption } = Astro.props;
+---
+
+<div class="carousel" data-carousel>
+  <div class="carousel-frame">
+    {images.map((img, i) => {
+      const caption = img.caption ?? fallbackCaption;
+      return (
+        <figure class="carousel-slide" hidden={i !== 0}>
+          <Image
+            src={img.src}
+            alt={caption ?? `Plate ${i + 1}`}
+            width={1500}
+            height={1125}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            style={img.focus ? `object-position: ${img.focus}` : undefined}
+          />
+          {caption && <figcaption class="caption carousel-caption">{caption}</figcaption>}
+        </figure>
+      );
+    })}
+  </div>
+  {images.length > 1 && (
+    <div class="carousel-controls">
+      <button type="button" class="carousel-prev meta" aria-label="Previous image">← PREV</button>
+      <span class="carousel-count meta-micro">
+        <span class="carousel-current">01</span> / {String(images.length).padStart(2, '0')}
+      </span>
+      <button type="button" class="carousel-next meta" aria-label="Next image">NEXT →</button>
+    </div>
+  )}
+</div>
+
+{images.length > 1 && (
+  <script>
+    document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+      const slides = Array.from(root.querySelectorAll<HTMLElement>('.carousel-slide'));
+      const prevBtn = root.querySelector<HTMLButtonElement>('.carousel-prev');
+      const nextBtn = root.querySelector<HTMLButtonElement>('.carousel-next');
+      const counter = root.querySelector<HTMLElement>('.carousel-current');
+      let current = 0;
+
+      function show(index: number) {
+        current = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => {
+          slide.hidden = i !== current;
+        });
+        if (counter) counter.textContent = String(current + 1).padStart(2, '0');
+      }
+
+      prevBtn?.addEventListener('click', () => show(current - 1));
+      nextBtn?.addEventListener('click', () => show(current + 1));
+
+      // Listen on the whole document, not just the carousel, so arrow keys
+      // work as soon as you land on the page — no need to click into the
+      // gallery first. Only one carousel per page, so no ambiguity about
+      // which one's listening. Skipped while focus is in a form field.
+      document.addEventListener('keydown', (e) => {
+        const tag = (document.activeElement?.tagName ?? '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+        if (e.key === 'ArrowLeft') show(current - 1);
+        if (e.key === 'ArrowRight') show(current + 1);
+      });
+    });
+  </script>
+)}
+
+<style>
+  .carousel {
+    margin: 0;
+  }
+
+  .carousel-frame {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* :not([hidden]) rather than a bare rule — author CSS on `display`
+     overrides the browser's own `[hidden] { display: none }` regardless of
+     specificity, so setting it unconditionally would show every slide
+     at once. */
+  .carousel-slide:not([hidden]) {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 100%;
+  }
+
+  .carousel-slide :global(img) {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 82vh;
+    background: var(--paper-1);
+  }
+
+  .carousel-caption {
+    padding: 0 var(--page-margin);
+    margin-top: var(--space-2);
+  }
+
+  .carousel-controls {
+    margin-top: var(--space-3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    width: fit-content;
+    max-width: calc(100% - var(--page-margin) * 2);
+    margin-inline: auto;
+    border-top: var(--border-width-hairline) solid var(--border-hairline);
+    border-bottom: var(--border-width-hairline) solid var(--border-hairline);
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .carousel-prev,
+  .carousel-next {
+    background: none;
+    border: none;
+    padding: var(--space-1) var(--space-2);
+    cursor: pointer;
+    color: var(--ink-1);
+  }
+
+  .carousel-prev:hover,
+  .carousel-next:hover {
+    color: var(--signal-red);
+  }
+
+  .carousel-count {
+    color: var(--ink-3);
+  }
+</style>

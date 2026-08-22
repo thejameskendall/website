@@ -2,6 +2,12 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 22 August 2026 (Portraits, first commercial page)
+
+- Extracted the project page's carousel (markup, CSS, script) into a shared `src/components/Carousel.astro` — this was about to become a third near-identical copy once commercial pages needed one too, so pulled it out rather than duplicating again. Same no-crop shrink-wrap behaviour as before, same `:not([hidden])` fix. Project page now just calls `<Carousel images={carouselImages} fallbackCaption={...} />`; behaviour unchanged, confirmed via build test.
+- Added an `images[]` gallery field to the commercial schema (same shape as projects: `src`, optional `caption`, optional `focus`) and wired the Carousel into the commercial category page template, shown only when a category has images.
+- Built out Portraits with real content: 16 photos from `Website Content/portraits/` copied to `src/assets/images/portraits/`. No captions and no body text per James's instruction ("no text required, I'll add captions and set an order later") — confirmed the build renders zero caption elements rather than filler text. Left `draft: true`. The other 4 commercial categories (Live Music, Bands, Events, Video) are untouched, still empty.
+
 ## Done — 22 August 2026
 
 - James wants the homepage hero specifically to stay full-bleed and cropped for impact — the "don't crop" fix was right for the project galleries but not what he wanted on the homepage. Reverted the hero back to `object-fit: cover`, full width/height, tag positioned against the full-bleed frame again. Kept the original aspect-ratio-cap fix for the actual bug this whole thread started from: `height: min(max(clamp(420px, 84vh, 900px), 56.25vw), 1000px)` still stops the box getting shorter than 16:9 on a wide monitor, so it won't crop bottoms off the way it did originally. Project carousels/plates are untouched — still shrink-wrapped, no crop, captions aligned to the image. Build tested, confirmed `object-fit:cover` back on the homepage and `contain`-style shrink-wrap unchanged on project pages.

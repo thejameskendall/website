@@ -45,13 +45,23 @@ const projects = defineCollection({
 
 const commercial = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/commercial' }),
-  schema: z.object({
-    title: z.string(),
-    order: z.number(),
-    summary: z.string(),
-    coverImage: z.string().optional(),
-    draft: z.boolean().default(false),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      order: z.number(),
+      summary: z.string(),
+      coverImage: z.string().optional(),
+      images: z
+        .array(
+          z.object({
+            src: image(),
+            caption: z.string().optional(),
+            focus: z.string().optional(),
+          })
+        )
+        .optional(), // gallery, sharp-optimised via astro:assets — same pattern as projects
+      draft: z.boolean().default(false),
+    }),
 });
 
 // Sveltia CMS writes an empty string for a blank optional text field rather

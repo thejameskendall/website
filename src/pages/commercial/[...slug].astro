@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Tag from '../../components/ds/Tag.astro';
 import MetaLine from '../../components/ds/MetaLine.astro';
 import ButtonLink from '../../components/ds/ButtonLink.astro';
+import Carousel from '../../components/Carousel.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -17,6 +18,8 @@ export async function getStaticPaths() {
 const { category } = Astro.props;
 const { Content } = await render(category);
 
+const images = category.data.images ?? [];
+
 const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURIComponent(`Commission — ${category.data.title}`)}`;
 ---
 
@@ -29,6 +32,12 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
     <h1 class="display-2">{category.data.title}</h1>
     <p class="standfirst">{category.data.summary}</p>
   </section>
+
+  {images.length > 0 && (
+    <section class="spread">
+      <Carousel images={images} />
+    </section>
+  )}
 
   <section class="page-pad body-block">
     <div class="prose">
@@ -62,6 +71,11 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
     max-width: 52ch;
     font-size: 17px;
     margin-top: var(--space-5);
+  }
+
+  .spread {
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-6);
   }
 
   .body-block {

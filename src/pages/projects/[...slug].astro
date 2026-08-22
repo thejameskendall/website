@@ -4,8 +4,8 @@ import Tag from '../../components/ds/Tag.astro';
 import Sticker from '../../components/ds/Sticker.astro';
 import MetaLine from '../../components/ds/MetaLine.astro';
 import RelatedStrip from '../../components/RelatedStrip.astro';
+import Carousel from '../../components/Carousel.astro';
 import { getCollection, render } from 'astro:content';
-import { Image } from 'astro:assets';
 import { SHOW_DRAFTS } from '../../lib/flags';
 import { placeholderImage } from '../../lib/placeholders';
 
@@ -79,34 +79,10 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
   {(hasGallery || placeholderSrc) && (
     <section class="spread">
       {hasGallery ? (
-        <div class="carousel" data-carousel>
-          <div class="carousel-frame">
-            {carouselImages.map((img, i) => (
-              <figure class="carousel-slide" hidden={i !== 0}>
-                <Image
-                  src={img.src}
-                  alt={img.caption ?? `${project.data.title}, plate ${i + 1}`}
-                  width={1500}
-                  height={1125}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  style={img.focus ? `object-position: ${img.focus}` : undefined}
-                />
-                <figcaption class="caption carousel-caption">
-                  {img.caption ?? `${project.data.title}, ${project.data.years}.`}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-          {carouselImages.length > 1 && (
-            <div class="carousel-controls">
-              <button type="button" class="carousel-prev meta" aria-label="Previous image">← PREV</button>
-              <span class="carousel-count meta-micro">
-                <span class="carousel-current">01</span> / {String(carouselImages.length).padStart(2, '0')}
-              </span>
-              <button type="button" class="carousel-next meta" aria-label="Next image">NEXT →</button>
-            </div>
-          )}
-        </div>
+        <Carousel
+          images={carouselImages}
+          fallbackCaption={`${project.data.title}, ${project.data.years}.`}
+        />
       ) : (
         <figure class="plate">
           <div class="plate-inner">
@@ -176,42 +152,6 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
   </section>
 
   <RelatedStrip items={siblings} heading="More projects" headingHref="/projects" />
-
-  {hasGallery && (
-  <script>
-    // Manual-advance carousel, one per project page. No autoplay by design —
-    // matches the poster system's static, editorial feel.
-    document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
-      const slides = Array.from(root.querySelectorAll<HTMLElement>('.carousel-slide'));
-      const prevBtn = root.querySelector<HTMLButtonElement>('.carousel-prev');
-      const nextBtn = root.querySelector<HTMLButtonElement>('.carousel-next');
-      const counter = root.querySelector<HTMLElement>('.carousel-current');
-      let current = 0;
-
-      function show(index: number) {
-        current = (index + slides.length) % slides.length;
-        slides.forEach((slide, i) => {
-          slide.hidden = i !== current;
-        });
-        if (counter) counter.textContent = String(current + 1).padStart(2, '0');
-      }
-
-      prevBtn?.addEventListener('click', () => show(current - 1));
-      nextBtn?.addEventListener('click', () => show(current + 1));
-
-      // Listen on the whole document, not just the carousel, so arrow keys
-      // work as soon as you land on the page — no need to click into the
-      // gallery first. One carousel per project page, so no ambiguity about
-      // which one's listening. Skipped while focus is in a form field.
-      document.addEventListener('keydown', (e) => {
-        const tag = (document.activeElement?.tagName ?? '').toLowerCase();
-        if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
-        if (e.key === 'ArrowLeft') show(current - 1);
-        if (e.key === 'ArrowRight') show(current + 1);
-      });
-    });
-  </script>
-  )}
 </BaseLayout>
 
 <style>
@@ -284,74 +224,6 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
   .plate-caption {
     padding: 0 var(--page-margin);
     margin-top: var(--space-2);
-  }
-
-  .carousel {
-    margin: 0;
-  }
-
-  .carousel-frame {
-    position: relative;
-    display: flex;
-    justify-content: center;
-  }
-
-  /* :not([hidden]) rather than a bare rule — author CSS on `display`
-     overrides the browser's own `[hidden] { display: none }` regardless of
-     specificity, so setting it unconditionally would show every slide
-     at once. */
-  .carousel-slide:not([hidden]) {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    max-width: 100%;
-  }
-
-  .carousel-slide :global(img) {
-    display: block;
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 82vh;
-    background: var(--paper-1);
-  }
-
-  .carousel-caption {
-    padding: 0 var(--page-margin);
-    margin-top: var(--space-2);
-  }
-
-  .carousel-controls {
-    margin-top: var(--space-3);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4);
-    width: fit-content;
-    max-width: calc(100% - var(--page-margin) * 2);
-    margin-inline: auto;
-    border-top: var(--border-width-hairline) solid var(--border-hairline);
-    border-bottom: var(--border-width-hairline) solid var(--border-hairline);
-    padding: var(--space-2) var(--space-4);
-  }
-
-  .carousel-prev,
-  .carousel-next {
-    background: none;
-    border: none;
-    padding: var(--space-1) var(--space-2);
-    cursor: pointer;
-    color: var(--ink-1);
-  }
-
-  .carousel-prev:hover,
-  .carousel-next:hover {
-    color: var(--signal-red);
-  }
-
-  .carousel-count {
-    color: var(--ink-3);
   }
 
   .companion-block {
