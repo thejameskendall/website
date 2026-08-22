@@ -65,11 +65,20 @@ const { images, fallbackCaption } = Astro.props;
       let current = 0;
 
       function show(index: number) {
+        // Different photos render at different heights now that the frame
+        // shrink-wraps to each image instead of a fixed box, so swapping
+        // slides changes the page's layout under the fold. Some browsers'
+        // scroll anchoring doesn't cope well with the anchored element
+        // itself being hidden and replaced, and yanks the scroll position —
+        // usually straight to the top. Pin it back to where it was.
+        const scrollBefore = window.scrollY;
         current = (index + slides.length) % slides.length;
         slides.forEach((slide, i) => {
           slide.hidden = i !== current;
         });
         if (counter) counter.textContent = String(current + 1).padStart(2, '0');
+        window.scrollTo({ top: scrollBefore, behavior: 'instant' });
+        requestAnimationFrame(() => window.scrollTo({ top: scrollBefore, behavior: 'instant' }));
       }
 
       prevBtn?.addEventListener('click', () => show(current - 1));
@@ -92,6 +101,10 @@ const { images, fallbackCaption } = Astro.props;
 <style>
   .carousel {
     margin: 0;
+    /* Belt and braces alongside the JS scroll-position pin — stops the
+       browser trying to be clever about keeping this element in view when
+       its size changes between slides. */
+    overflow-anchor: none;
   }
 
   .carousel-frame {

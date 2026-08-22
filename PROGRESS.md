@@ -2,6 +2,10 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 22 August 2026 (carousel scroll jump)
+
+- Clicking prev/next in a project or commercial gallery was resetting scroll to the top of the page. Cause: since the carousel frame now shrink-wraps to each image's own rendered size (the no-crop fix), different photos have different heights, so swapping slides shifts everything below the fold — and the browser's scroll anchoring doesn't cope well with the anchored element itself being hidden and swapped, occasionally yanking scroll position to the top. Fixed in `Carousel.astro`'s `show()`: captures `window.scrollY` before the swap and pins it straight back after (both synchronously and again on the next frame, belt and braces), plus `overflow-anchor: none` on `.carousel` to stop the browser trying to anchor there at all. Doesn't affect the homepage hero, which uses a fixed-height box and never had this problem. Build tested, confirmed the pin logic in the bundled script.
+
 ## Done — 22 August 2026 (Portraits, first commercial page)
 
 - Extracted the project page's carousel (markup, CSS, script) into a shared `src/components/Carousel.astro` — this was about to become a third near-identical copy once commercial pages needed one too, so pulled it out rather than duplicating again. Same no-crop shrink-wrap behaviour as before, same `:not([hidden])` fix. Project page now just calls `<Carousel images={carouselImages} fallbackCaption={...} />`; behaviour unchanged, confirmed via build test.
