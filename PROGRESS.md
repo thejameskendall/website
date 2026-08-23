@@ -2,6 +2,10 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 23 August 2026 (nav dropdowns, fixed)
+
+- James caught the dropdowns rendering as a squeezed, overflowing horizontal mess instead of a stacked list. Cause: the top nav bar's `nav ul { display: flex; ... }` rule was a plain descendant selector, so it also matched the nested dropdown `<ul>` panels and flexed them into a row, overflowing past the panel's own black background onto the page behind. Renamed the top-level list to `.nav-list` and switched the CSS to that class instead of `nav ul`, and pinned `.dropdown-panel` to `display: block` explicitly so a future ancestor rule can't do this again. Build tested, confirmed in the bundled CSS.
+
 ## Done — 23 August 2026 (nav dropdowns)
 
 - Projects and Commercial nav items now open a dropdown listing their actual pages (project titles + years, commercial category names), pulled live from the content collections and sorted by `order` — never needs manual updating as sections are added. The nav label itself still links to the section index as before; a separate small `[+]` toggle beside it opens the list. Reused the existing `.inverse` DS surface (flat dark panel, no shadow/blur) rather than inventing a new one. Opens on hover for pointer devices, click-toggles for touch/keyboard, closes on Escape or a click outside. Collapses to an inline block on narrow screens instead of floating. Build tested, confirmed both dropdowns list the right pages in the right order and the toggle script is present in the bundle.
