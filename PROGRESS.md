@@ -2,6 +2,10 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 23 August 2026 (nav dropdowns)
+
+- Projects and Commercial nav items now open a dropdown listing their actual pages (project titles + years, commercial category names), pulled live from the content collections and sorted by `order` — never needs manual updating as sections are added. The nav label itself still links to the section index as before; a separate small `[+]` toggle beside it opens the list. Reused the existing `.inverse` DS surface (flat dark panel, no shadow/blur) rather than inventing a new one. Opens on hover for pointer devices, click-toggles for touch/keyboard, closes on Escape or a click outside. Collapses to an inline block on narrow screens instead of floating. Build tested, confirmed both dropdowns list the right pages in the right order and the toggle script is present in the bundle.
+
 ## Done — 23 August 2026 (SEO audit, critical fixes)
 
 - Ran a full SEO audit of the site as built so far. Fixed the four critical issues found:
