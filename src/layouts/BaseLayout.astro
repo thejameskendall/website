@@ -9,17 +9,20 @@ import '@fontsource/permanent-marker';
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { NOINDEX_SITE } from '../lib/flags';
 
 interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 
 const {
   title,
   description = 'James Kendall — photographer and writer. Contemporary art practice, commercial photography, video, and music journalism.',
   ogImage = '/og-default.jpg',
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
@@ -34,6 +37,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <title>{title} — James Kendall</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {(NOINDEX_SITE || noindex) && <meta name="robots" content="noindex, nofollow" />}
 
     <meta property="og:title" content={`${title} — James Kendall`} />
     <meta property="og:description" content={description} />

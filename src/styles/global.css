@@ -153,6 +153,22 @@ p + p { margin-top: var(--space-4); }
 .inverse a { color: var(--text-on-inverse); }
 .inverse a:hover { color: var(--signal-red); }
 
+/* Visually hidden but present for screen readers and crawlers — used for
+   headings that would otherwise duplicate the poster-style visual copy
+   (e.g. the homepage h1, where the wordmark in the nav already carries the
+   name visually). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Skip link for keyboard users */
 
 .skip-link {

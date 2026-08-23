@@ -44,7 +44,7 @@ const siblings = (await getCollection('writing', ({ data }) => SHOW_DRAFTS || !d
   }));
 ---
 
-<BaseLayout title={post.data.title} description={post.data.summary}>
+<BaseLayout title={post.data.title} description={post.data.summary} noindex={post.data.draft}>
   <article class="piece page-pad">
     <header>
       <div class="tag-row">
