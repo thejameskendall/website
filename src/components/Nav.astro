@@ -33,7 +33,7 @@ const links = [
 <header class="site-nav page-pad">
   <a href="/" class="wordmark" aria-label="James Kendall home">James Kendall</a>
   <nav aria-label="Primary">
-    <ul>
+    <ul class="nav-list">
       <li class="nav-item" data-nav-dropdown>
         <a
           href="/projects"
@@ -187,7 +187,11 @@ const links = [
     color: var(--signal-red);
   }
 
-  nav ul {
+  /* .nav-list, not "nav ul" — the dropdown panels below are also <ul>
+     elements nested inside <nav>, and a plain descendant selector would
+     have flexed them into a row too (this is exactly what broke the
+     dropdown layout the first time round). */
+  .nav-list {
     display: flex;
     gap: 28px;
     align-items: center;
@@ -237,6 +241,7 @@ const links = [
   }
 
   .dropdown-panel {
+    display: block;
     position: absolute;
     top: calc(100% + 18px);
     left: 0;
@@ -278,7 +283,7 @@ const links = [
       align-items: flex-start;
       gap: var(--space-3);
     }
-    nav ul { flex-wrap: wrap; gap: var(--space-4); }
+    .nav-list { flex-wrap: wrap; gap: var(--space-4); }
     .nav-item {
       flex-wrap: wrap;
       width: 100%;
