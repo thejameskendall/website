@@ -240,7 +240,14 @@ const links = [
      here it read as loud and heavy rather than a quiet list of links.
      A flat hard-offset shadow (--shadow-paper, no blur, DS-approved) gives
      it just enough lift to read as a floating panel over the page. */
-  .dropdown-panel {
+  /* :not([hidden]) — the same trap the carousel hit earlier in this build:
+     author CSS setting "display" always beats the browser's own
+     "[hidden] { display: none }", regardless of specificity. An
+     unconditional "display: block" here is what made the JS's hidden
+     toggle stop having any visible effect — panels looked "stuck open"
+     because the attribute was changing correctly, the CSS just no longer
+     cared about it. */
+  .dropdown-panel:not([hidden]) {
     display: block;
     position: absolute;
     top: calc(100% + 14px);
