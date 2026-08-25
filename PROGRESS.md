@@ -2,6 +2,10 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 23 August 2026 (nav dropdowns, third fix — stuck open)
+
+- Title colour and panel design were both fixed, but James then found both dropdowns getting stuck open with no way to close them. Cause: this build already hit this exact bug once with the carousel/hero slides — author CSS setting `display` always beats the browser's own `[hidden] { display: none }`, regardless of specificity. The defensive `display: block` added to `.dropdown-panel` in the previous fix meant the JS's `panel.hidden = true` was still setting the attribute correctly, but the CSS no longer cared about it, so nothing ever actually hid. Scoped the rule to `.dropdown-panel:not([hidden])`, matching the pattern already used for `.carousel-slide` and `.hero-slide`. Build tested, confirmed `:not([hidden])` present in the bundled CSS.
+
 ## Done — 23 August 2026 (nav dropdowns, second fix)
 
 - James's screenshot showed two real problems, not one: project/category titles were rendering invisible (dark text on the dark panel), and the panel looked "overpowering". Root cause of the invisible text: `nav a { color: ink-1 }` is scoped to this component, and Astro's scoping attribute gets appended to every selector segment — so `nav[data-cid] a[data-cid]` ended up MORE specific than the dropdown's own single-class colour rule, silently winning and forcing dark text onto a dark background. Fixed by setting colour explicitly on `.dropdown-panel a` so it can't lose that fight regardless of what else targets `nav a` in future.
