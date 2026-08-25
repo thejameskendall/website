@@ -44,11 +44,11 @@ exhibitionViews:
   - src: ../../assets/images/wasted-on-the-young/exhibition/DSCF1462.jpg.webp
     caption: Exhibition view, Disclosive group show, CCA, Brighton
   - src: ../../assets/images/wasted-on-the-young/exhibition/3.jpg
-    caption: Exhibition view, Disclosive group show, CCA, Brighton
+    caption: Wasted On The Young (solo show), North Laine, Brighton, 2024
   - src: ../../assets/images/wasted-on-the-young/exhibition/4.jpg
-    caption: Exhibition view, Disclosive group show, CCA, Brighton
+    caption: Wasted On The Young (solo show), North Laine, Brighton, 2024
   - src: ../../assets/images/wasted-on-the-young/exhibition/5.jpg
-    caption: Exhibition view, Disclosive group show, CCA, Brighton
+    caption: Wasted On The Young (solo show), Duke's Lane, Brighton, 2024
 relatedWriting:
   - all-under-one-roof-raving
 ---
