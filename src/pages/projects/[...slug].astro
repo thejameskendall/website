@@ -5,6 +5,7 @@ import Sticker from '../../components/ds/Sticker.astro';
 import MetaLine from '../../components/ds/MetaLine.astro';
 import RelatedStrip from '../../components/RelatedStrip.astro';
 import Carousel from '../../components/Carousel.astro';
+import { Image } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
 import { SHOW_DRAFTS } from '../../lib/flags';
 import { placeholderImage } from '../../lib/placeholders';
@@ -25,9 +26,11 @@ const number = `PROJECT ${String(project.data.order).padStart(2, '0')}`;
 const ongoing = /[—–-]\s*$/.test(project.data.years);
 
 // Real gallery takes over from the legacy single placeholder image once present.
-// All plates + exhibition views live in one manually-advanced carousel.
+// Exhibition views are documentation of a show, not the artwork itself, so
+// they get their own static row further down the page rather than being
+// mixed into the plates carousel.
 const exhibitionViews = project.data.exhibitionViews ?? [];
-const carouselImages = [...(project.data.images ?? []), ...exhibitionViews];
+const carouselImages = project.data.images ?? [];
 const hasGallery = carouselImages.length > 0;
 
 const placeholderSrc = project.data.coverImage ?? placeholderImage(project.id);
@@ -107,6 +110,30 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
       <Content />
     </div>
   </section>
+
+  {exhibitionViews.length > 0 && (
+    <section class="page-pad exhibition-block">
+      <MetaLine
+        border="both"
+        items={['EXHIBITION VIEWS', `[${String(exhibitionViews.length).padStart(2, '0')}]`]}
+      />
+      <div class="exhibition-grid">
+        {exhibitionViews.map((view, i) => (
+          <figure class="exhibition-item">
+            <Image
+              src={view.src}
+              alt={view.caption ?? `Exhibition view ${i + 1}`}
+              width={1200}
+              height={900}
+              loading="lazy"
+              style={view.focus ? `object-position: ${view.focus}` : undefined}
+            />
+            {view.caption && <figcaption class="caption">{view.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    </section>
+  )}
 
   {companion && (
     <section class="page-pad companion-block">
@@ -223,6 +250,38 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
 
   .plate-caption {
     padding: 0 var(--page-margin);
+    margin-top: var(--space-2);
+  }
+
+  .exhibition-block {
+    margin-top: var(--space-7);
+  }
+
+  /* Deliberately a static grid, not a carousel — these are documentation of
+     a show, not the artwork, so they don't need the same one-at-a-time
+     treatment as the plates above. Same no-crop rule as everywhere else:
+     width 100%, height auto, never object-fit: cover. auto-fit/minmax lets
+     5 images settle into whatever column count fits (3+2 on desktop,
+     1-up on narrow screens) without a fixed count to maintain. */
+  .exhibition-grid {
+    margin-top: var(--space-4);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-5);
+  }
+
+  .exhibition-item {
+    margin: 0;
+  }
+
+  .exhibition-item :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--paper-1);
+  }
+
+  .exhibition-item figcaption {
     margin-top: var(--space-2);
   }
 

@@ -43,6 +43,12 @@ exhibitionViews:
     caption: Exhibition view, Disclosive group show, CCA, Brighton
   - src: ../../assets/images/wasted-on-the-young/exhibition/DSCF1462.jpg.webp
     caption: Exhibition view, Disclosive group show, CCA, Brighton
+  - src: ../../assets/images/wasted-on-the-young/exhibition/3.jpg
+    caption: Exhibition view, Disclosive group show, CCA, Brighton
+  - src: ../../assets/images/wasted-on-the-young/exhibition/4.jpg
+    caption: Exhibition view, Disclosive group show, CCA, Brighton
+  - src: ../../assets/images/wasted-on-the-young/exhibition/5.jpg
+    caption: Exhibition view, Disclosive group show, CCA, Brighton
 relatedWriting:
   - all-under-one-roof-raving
 ---
