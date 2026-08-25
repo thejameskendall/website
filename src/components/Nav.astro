@@ -47,7 +47,7 @@ const links = [
           aria-controls="dropdown-projects"
           aria-label="Show list of projects"
         >+</button>
-        <ul id="dropdown-projects" class="dropdown-panel inverse" hidden>
+        <ul id="dropdown-projects" class="dropdown-panel" hidden>
           {projects.map((p) => (
             <li>
               <a href={`/projects/${p.id}`}>
@@ -73,7 +73,7 @@ const links = [
           aria-controls="dropdown-commercial"
           aria-label="Show list of commercial categories"
         >+</button>
-        <ul id="dropdown-commercial" class="dropdown-panel inverse" hidden>
+        <ul id="dropdown-commercial" class="dropdown-panel" hidden>
           {commercial.map((c) => (
             <li>
               <a href={`/commercial/${c.id}`}>
@@ -132,20 +132,15 @@ const links = [
     return item.querySelector('.dropdown-toggle')?.getAttribute('aria-expanded') === 'true';
   }
 
+  // Click-only, deliberately no hover-to-open. Hovering across the nav to
+  // reach Writing/About was popping a heavy panel open uninvited, and
+  // fast mouse movement between the two toggles could leave both open at
+  // once. A click is a clear, single, unambiguous "open this" action.
   items.forEach((item) => {
     const toggle = item.querySelector<HTMLButtonElement>('.dropdown-toggle');
 
     toggle?.addEventListener('click', () => {
       isOpen(item) ? close(item) : open(item);
-    });
-
-    // Hover opens on pointer devices — mirrors a conventional dropdown menu
-    // without losing click/keyboard access for touch and screen readers.
-    item.addEventListener('mouseenter', () => {
-      if (matchMedia('(hover: hover)').matches) open(item);
-    });
-    item.addEventListener('mouseleave', () => {
-      if (matchMedia('(hover: hover)').matches) close(item);
     });
   });
 
@@ -240,38 +235,54 @@ const links = [
     border-color: var(--signal-red);
   }
 
+  /* Paper-toned, not the dark .inverse surface — that token is meant for
+     full-bleed poster moments, not a small nav utility panel, and used
+     here it read as loud and heavy rather than a quiet list of links.
+     A flat hard-offset shadow (--shadow-paper, no blur, DS-approved) gives
+     it just enough lift to read as a floating panel over the page. */
   .dropdown-panel {
     display: block;
     position: absolute;
-    top: calc(100% + 18px);
+    top: calc(100% + 14px);
     left: 0;
     z-index: 20;
-    min-width: 240px;
-    max-width: 320px;
+    min-width: 220px;
+    max-width: 300px;
     list-style: none;
-    padding: var(--space-3);
-    border: var(--border-width-hairline) solid var(--ink-1);
+    padding: var(--space-4);
+    background: var(--paper-2);
+    border: var(--border-width-hairline) solid var(--border-hairline);
+    box-shadow: var(--shadow-paper);
   }
 
   .dropdown-panel li + li {
-    margin-top: var(--space-2);
-    padding-top: var(--space-2);
-    border-top: var(--border-width-hairline) solid var(--ink-3);
+    margin-top: var(--space-3);
   }
 
+  /* Explicit colour here, not inherited from "nav a" — that rule is scoped
+     to this component too, and because Astro's scoping attribute stacks
+     onto every selector segment, "nav a" ended up more specific than the
+     old dark-panel text colour and silently won, rendering every title
+     in dark ink on a dark background. Setting it directly here removes
+     any ambiguity about which rule wins. */
   .dropdown-panel a {
     display: block;
     font-size: 13px;
     letter-spacing: normal;
     text-transform: none;
     line-height: 1.3;
+    color: var(--ink-2);
+  }
+
+  .dropdown-panel a:hover {
+    color: var(--signal-red);
   }
 
   .dropdown-meta {
     display: block;
     font-family: var(--font-mono);
     font-size: 10px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--ink-4);
     margin-top: 2px;
