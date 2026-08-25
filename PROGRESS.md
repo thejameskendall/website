@@ -2,6 +2,13 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 23 August 2026 (nav dropdowns, second fix)
+
+- James's screenshot showed two real problems, not one: project/category titles were rendering invisible (dark text on the dark panel), and the panel looked "overpowering". Root cause of the invisible text: `nav a { color: ink-1 }` is scoped to this component, and Astro's scoping attribute gets appended to every selector segment — so `nav[data-cid] a[data-cid]` ended up MORE specific than the dropdown's own single-class colour rule, silently winning and forcing dark text onto a dark background. Fixed by setting colour explicitly on `.dropdown-panel a` so it can't lose that fight regardless of what else targets `nav a` in future.
+- Separately, swapped the panel off the `.inverse` dark surface (documented in `global.css` as being for full-bleed poster moments, not a small nav list — using it here is what made it feel heavy) onto a quiet `--paper-2` background with a hairline border and the flat `--shadow-paper` token for a touch of lift.
+- Also removed hover-to-open entirely — click only now, via the `[+]` toggle. Fast mouse movement between the two adjacent hover targets was the likely cause of both panels appearing open and overlapping at once; a click is unambiguous and removes that whole class of race condition.
+- Build tested, confirmed in the bundled CSS: no `.inverse` on either panel, `background: var(--paper-2)`, explicit `color: var(--ink-2)` on dropdown links, and no `mouseenter`/`mouseleave` left in the bundled script.
+
 ## Done — 23 August 2026 (exhibition views split out of the carousel)
 
 - Wasted On The Young's exhibition views were merged straight into the top plates carousel — James now has 5 of them (3 new, added to `src/assets/images/wasted-on-the-young/exhibition/`) and didn't want them mixed in with the actual artwork plates. Gave them their own static grid section instead, placed after the body text: `auto-fit, minmax(260px, 1fr)` columns so it reflows cleanly (3+2 on desktop, single column on narrow screens), same no-crop rule as the rest of the site (`width: 100%; height: auto`, never `object-fit: cover`). Top carousel is back to plates only (15 images). Placeholder caption on the 3 new images matches the existing two ("Exhibition view, Disclosive group show, CCA, Brighton") — needs confirming if any are from a different show. Build tested, confirmed carousel count is 15/15 and the grid shows all 5 with a `[05]` count badge.
