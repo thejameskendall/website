@@ -2,6 +2,10 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 23 August 2026 (exhibition views split out of the carousel)
+
+- Wasted On The Young's exhibition views were merged straight into the top plates carousel — James now has 5 of them (3 new, added to `src/assets/images/wasted-on-the-young/exhibition/`) and didn't want them mixed in with the actual artwork plates. Gave them their own static grid section instead, placed after the body text: `auto-fit, minmax(260px, 1fr)` columns so it reflows cleanly (3+2 on desktop, single column on narrow screens), same no-crop rule as the rest of the site (`width: 100%; height: auto`, never `object-fit: cover`). Top carousel is back to plates only (15 images). Placeholder caption on the 3 new images matches the existing two ("Exhibition view, Disclosive group show, CCA, Brighton") — needs confirming if any are from a different show. Build tested, confirmed carousel count is 15/15 and the grid shows all 5 with a `[05]` count badge.
+
 ## Done — 23 August 2026 (nav dropdowns, fixed)
 
 - James caught the dropdowns rendering as a squeezed, overflowing horizontal mess instead of a stacked list. Cause: the top nav bar's `nav ul { display: flex; ... }` rule was a plain descendant selector, so it also matched the nested dropdown `<ul>` panels and flexed them into a row, overflowing past the panel's own black background onto the page behind. Renamed the top-level list to `.nav-list` and switched the CSS to that class instead of `nav ul`, and pinned `.dropdown-panel` to `display: block` explicitly so a future ancestor rule can't do this again. Build tested, confirmed in the bundled CSS.
