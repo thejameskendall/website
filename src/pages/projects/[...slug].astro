@@ -65,7 +65,12 @@ const siblings = (await getCollection('projects', ({ data }) => SHOW_DRAFTS || !
 const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURIComponent(`Prints — ${project.data.title}`)}`;
 ---
 
-<BaseLayout title={project.data.title} description={project.data.summary} noindex={project.data.draft}>
+<BaseLayout
+  title={project.data.title}
+  description={project.data.summary}
+  noindex={project.data.draft}
+  ogImage={carouselImages[0]?.src.src}
+>
   <!-- Title block — DS website kit Project pattern -->
   <section class="title-block page-pad">
     <div class="tag-row">
@@ -124,7 +129,6 @@ const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURICompone
               src={view.src}
               alt={view.caption ?? `Exhibition view ${i + 1}`}
               width={1200}
-              height={900}
               loading="lazy"
               style={view.focus ? `object-position: ${view.focus}` : undefined}
             />

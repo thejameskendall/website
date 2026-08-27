@@ -12,8 +12,11 @@ const count = `[${String(posts.length).padStart(2, '0')}]`;
 
 // Catalogue date: 12 [MAR] 2025
 function catalogueDate(d: Date): string {
-  const month = d.toLocaleDateString('en-GB', { month: 'short' }).toUpperCase();
-  return `${String(d.getDate()).padStart(2, '0')} [${month}] ${d.getFullYear()}`;
+  // UTC accessors, not local — YAML frontmatter dates parse as UTC midnight,
+  // so local getDate() renders the previous day on any build machine in a
+  // timezone west of UTC (e.g. a CI runner pinned to a US region).
+  const month = d.toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' }).toUpperCase();
+  return `${String(d.getUTCDate()).padStart(2, '0')} [${month}] ${d.getUTCFullYear()}`;
 }
 
 const types = [...new Set(posts.map((p) => p.data.type))];

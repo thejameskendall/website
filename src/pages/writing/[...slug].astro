@@ -22,8 +22,11 @@ const { Content } = await render(post);
 const { SHOW_DRAFTS } = await import('../../lib/flags');
 
 function catalogueDate(d: Date): string {
-  const month = d.toLocaleDateString('en-GB', { month: 'short' }).toUpperCase();
-  return `${String(d.getDate()).padStart(2, '0')} [${month}] ${d.getFullYear()}`;
+  // UTC accessors, not local — YAML frontmatter dates parse as UTC midnight,
+  // so local getDate() renders the previous day on any build machine in a
+  // timezone west of UTC (e.g. a CI runner pinned to a US region).
+  const month = d.toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' }).toUpperCase();
+  return `${String(d.getUTCDate()).padStart(2, '0')} [${month}] ${d.getUTCFullYear()}`;
 }
 
 // Related project lookup
@@ -42,9 +45,27 @@ const siblings = (await getCollection('writing', ({ data }) => SHOW_DRAFTS || !d
     eyebrow: 'Writing',
     meta: catalogueDate(w.data.date),
   }));
+// Article structured data. Author/publisher kept minimal — one Person node,
+// no invented organisation. coverImage doubles as the og/share image when set.
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  datePublished: post.data.date.toISOString().slice(0, 10),
+  author: { '@type': 'Person', name: 'James Kendall', url: new URL('/about', Astro.site).toString() },
+  ...(post.data.publication ? { publisher: { '@type': 'Organization', name: post.data.publication } } : {}),
+  ...(post.data.coverImage ? { image: new URL(post.data.coverImage, Astro.site).toString() } : {}),
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).toString(),
+};
 ---
 
-<BaseLayout title={post.data.title} description={post.data.summary} noindex={post.data.draft}>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.summary}
+  noindex={post.data.draft}
+  ogImage={post.data.coverImage}
+  structuredData={articleLd}
+>
   <article class="piece page-pad">
     <header>
       <div class="tag-row">

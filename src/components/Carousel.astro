@@ -31,11 +31,15 @@ const { images, fallbackCaption } = Astro.props;
       const caption = img.caption ?? fallbackCaption;
       return (
         <figure class="carousel-slide" hidden={i !== 0}>
+          {/* width only, no height — with both set, the default image service
+              resizes with fit: cover and crops any non-4:3 source to match
+              (e.g. the one portrait-orientation frame in Portraits). Width
+              alone keeps each image's own aspect ratio; Astro still infers
+              the correct height attribute from the source file. */}
           <Image
             src={img.src}
             alt={caption ?? `Plate ${i + 1}`}
             width={1500}
-            height={1125}
             loading={i === 0 ? 'eager' : 'lazy'}
             style={img.focus ? `object-position: ${img.focus}` : undefined}
           />
@@ -47,7 +51,7 @@ const { images, fallbackCaption } = Astro.props;
   {images.length > 1 && (
     <div class="carousel-controls">
       <button type="button" class="carousel-prev meta" aria-label="Previous image">← PREV</button>
-      <span class="carousel-count meta-micro">
+      <span class="carousel-count meta-micro" aria-live="polite">
         <span class="carousel-current">01</span> / {String(images.length).padStart(2, '0')}
       </span>
       <button type="button" class="carousel-next meta" aria-label="Next image">NEXT →</button>

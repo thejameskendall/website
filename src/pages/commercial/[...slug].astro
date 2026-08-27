@@ -23,7 +23,12 @@ const images = category.data.images ?? [];
 const enquire = `mailto:jameswilliamkendall@gmail.com?subject=${encodeURIComponent(`Commission — ${category.data.title}`)}`;
 ---
 
-<BaseLayout title={category.data.title} description={category.data.summary} noindex={category.data.draft}>
+<BaseLayout
+  title={category.data.title}
+  description={category.data.summary}
+  noindex={category.data.draft}
+  ogImage={images[0]?.src.src}
+>
   <section class="title-block page-pad">
     <div class="tag-row">
       <Tag><a href="/commercial">Commercial</a></Tag>

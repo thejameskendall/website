@@ -306,7 +306,15 @@ const links = [
       flex-wrap: wrap;
       width: 100%;
     }
-    .dropdown-panel {
+    /* :not([hidden]) here too — not for the display trap this time, but for
+       specificity: the base rule above is .dropdown-panel:not([hidden])
+       (0,2,0 before scoping), so a bare .dropdown-panel (0,1,0) in this
+       media query silently loses every property the base rule also sets.
+       That left position: absolute and max-width: 300px winning on narrow
+       screens, so the panel floated over the page instead of collapsing
+       to an inline block as intended. Selectors must match in specificity
+       for the override to take. */
+    .dropdown-panel:not([hidden]) {
       position: static;
       margin-top: var(--space-2);
       width: 100%;

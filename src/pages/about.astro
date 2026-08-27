@@ -3,9 +3,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Tag from '../components/ds/Tag.astro';
 import MetaLine from '../components/ds/MetaLine.astro';
 import ButtonLink from '../components/ds/ButtonLink.astro';
+
+// Person structured data — same node as the homepage.
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'James Kendall',
+  jobTitle: 'Photographer and writer',
+  url: new URL('/', Astro.site).toString(),
+  sameAs: ['https://instagram.com/thejameskendall'],
+  address: { '@type': 'PostalAddress', addressLocality: 'Brighton', addressCountry: 'GB' },
+};
 ---
 
-<BaseLayout title="About" description="James Kendall is a photographer and writer based in Brighton, UK.">
+<BaseLayout
+  title="About"
+  description="James Kendall is a photographer and writer based in Brighton, UK."
+  structuredData={personLd}
+>
   <section class="about page-pad">
     <div class="bio">
       <h1 class="display-2">Thirty years<br />in the crowd</h1>

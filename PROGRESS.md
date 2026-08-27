@@ -2,6 +2,35 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 27 August 2026 (full code review pass)
+
+- Full review of the codebase at James's request: bugs, fragile patterns, accessibility, design-system consistency, plus a dedicated sweep for the `display` vs `[hidden]` trap. Everything below build-tested in one pass (41 pages, clean).
+- **The `[hidden]` trap was lurking again, in mirror form.** The sweep found all three `hidden`-toggled elements (`.carousel-slide`, `.hero-slide`, `.dropdown-panel`) correctly guarded against the display side of the trap. But the `:not([hidden])` fix on `.dropdown-panel` raised that selector's specificity to (0,2,0), which silently killed the mobile media query's bare `.dropdown-panel` override (0,1,0): `position: static` and `max-width: none` never applied, so on narrow screens the panel still floated absolutely over the page instead of collapsing inline. Lesson for the log: **any override of a `.dropdown-panel:not([hidden])`-guarded rule must repeat the `:not([hidden])` to match its specificity.** Fixed and confirmed in the bundled CSS.
+- **Real crop bug found in the Carousel and exhibition `<Image>`s:** both passed fixed `width` and `height` (1500x1125 / 1200x900). Astro's image service resizes with `fit: cover` when both are set, so any non-4:3 source was being physically cropped to 4:3 at build time, violating the site's no-crop rule. Invisible so far because nearly every source is 4:3, but Portraits has several off-ratio frames including one portrait-orientation photo (7.webp, 1000x1250) that was being centre-cropped to landscape. Removed the `height` prop; Astro infers the correct height per image from the source file. Confirmed in dist: 7.webp now emits at 1500x1875, ratio preserved, correct width/height attributes on every gallery image.
+- Catalogue dates (`catalogueDate` in both Writing pages) switched to UTC accessors. YAML dates parse as UTC midnight, so local `getDate()` renders the previous day on any build machine west of UTC. Fine on James's Mac and Cloudflare today, a silent off-by-one-day if a CI runner ever sits in a US region.
+- Added `src/pages/404.astro` (DS-styled: tag row, display headline, links back to Projects/Writing/home). `wrangler.jsonc` already declared `not_found_handling: "404-page"` but nothing generated `dist/404.html`, so Cloudflare had no page to serve.
+- SEO follow-ups from the 23 August audit, now done:
+  - JSON-LD structured data: `Person` on home + About, `Article` (headline, date, author, publication, cover image) on every Writing piece, via a new optional `structuredData` prop on `BaseLayout`.
+  - `og:image` now uses each page's own image where one exists: Writing pieces use `coverImage`, project and commercial pages use their first gallery image. Previously everything shared the generic og-default.jpg.
+  - Homepage hero `<img>`s now carry `width`/`height` attributes for real-asset slides (placeholder slides can't — plain public/ paths, no metadata — but the frame's fixed CSS height already prevents layout shift there).
+- Small behaviour change while wiring the above: hero slides for commercial sections now prefer a real first gallery image over the placeholder map, same rule as project slides — so Portraits shows its own photo instead of a WOTY crop.
+- Added `aria-live="polite"` to the project/commercial carousel counter so screen-reader users hear the position change.
+
+### Flagged, not fixed (26-27 August review)
+
+- **Writing meta descriptions:** the 19 long summaries (all ~215-225 chars, machine-truncated with a trailing ellipsis) and the 3 literal "summary to be written" placeholders (Abi Wade, Aroe, Orbital) are both live meta descriptions AND the visible standfirsts on the Writing index. Rewriting them is editorial, in James's voice, so left alone. Worth a CMS pass: aim under ~155 chars.
+- **Performance, medium:** `PosterCard` and the homepage hero use `images[0].src.src` — the original full-size asset, not a sharp-resized rendition. The homepage grid + hero load multi-hundred-KB originals where a 600px card image would do. Proper fix is passing `ImageMetadata` through to an `<Image>` in `PosterCard` (schema change ripples to hero slides too). Also: card thumbnails still use the plain JPEG noted 6 August.
+- Sitemap includes draft/noindexed pages. Harmless while NOINDEX_SITE is on; ideally filtered before launch.
+- Hero autoplay has no explicit pause control (WCAG 2.2.2 wants one for auto-advancing content; prev/next does stop it permanently, which is arguably enough). A small [PAUSE] toggle in the controls row would settle it.
+- Carousel arrow-key handler is document-level and assumes one carousel per page — true today, will double-fire if a second carousel ever lands on one page.
+- All 20 migrated article images have empty alt text (`![]()`), fine for decorative use but thin for photo-led journalism; footer year is frozen at build time (fine while deploys are frequent); dropdown toggle buttons are 16px, under the 24px WCAG 2.5.8 minimum target size.
+
+### Open questions for James (27 August)
+
+- Plate captions say "29mm x 38mm" (Made Beds, Unmade Beds). Millimetres would be postage-stamp size — should these read 29cm x 38cm? Taken from supplied text, so not changed.
+- `PosterCard` title uses a soft blurred text-shadow (24px) for legibility over photos — technically against the DS's "no shadows except the flat offset token" rule, but ported from DS core, so presumed sanctioned. Confirm or swap for the flat token.
+- Instagram links (footer, About) show "↗" but open in the same tab — add `target="_blank"`, or drop the arrow?
+
 ## Done — 23 August 2026 (dropdown toggle icon)
 
 - Swapped the `+`/`−` dropdown toggle for a chevron (`▾` closed, `▴` open). James asked whether `+` was good practice for a nav dropdown — it's not the strongest choice: plus/minus reads as "expand this accordion/FAQ in place" to most people, not "reveal a navigation menu". A chevron is the convention almost everyone has already learned from mega-menus elsewhere on the web. Same button, same click behaviour, just a clearer symbol. Build tested, confirmed in the bundled script.

@@ -26,15 +26,34 @@ const projectSlides = projects.map((p) => ({
   kind: 'PROJECT',
   image: p.data.images?.[0]?.src.src ?? p.data.coverImage ?? placeholderImage(p.id),
   focus: p.data.images?.[0]?.focus,
+  // Intrinsic dimensions when the slide is a real imported asset — emitted as
+  // width/height attributes below. Placeholder slides (plain public/ paths)
+  // have no metadata; the frame's fixed CSS height prevents layout shift
+  // either way, so those simply omit the attributes.
+  width: p.data.images?.[0]?.src.width,
+  height: p.data.images?.[0]?.src.height,
 }));
 
 const commercialSlides = commercial.map((c) => ({
   href: `/commercial/${c.id}`,
   title: c.data.title,
   kind: 'COMMERCIAL',
-  image: c.data.coverImage ?? placeholderImage(c.id),
-  focus: undefined as string | undefined,
+  image: c.data.images?.[0]?.src.src ?? c.data.coverImage ?? placeholderImage(c.id),
+  focus: c.data.images?.[0]?.focus,
+  width: c.data.images?.[0]?.src.width,
+  height: c.data.images?.[0]?.src.height,
 }));
+
+// Person structured data — homepage and About carry the same node.
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'James Kendall',
+  jobTitle: 'Photographer and writer',
+  url: new URL('/', Astro.site).toString(),
+  sameAs: ['https://instagram.com/thejameskendall'],
+  address: { '@type': 'PostalAddress', addressLocality: 'Brighton', addressCountry: 'GB' },
+};
 
 const heroSlides: typeof projectSlides = [];
 const maxLen = Math.max(projectSlides.length, commercialSlides.length);
@@ -47,6 +66,7 @@ for (let i = 0; i < maxLen; i++) {
 <BaseLayout
   title="Photographer & Writer, Brighton"
   description="James Kendall is a photographer and writer based in Brighton, UK. Contemporary art photography, commercial work, and music journalism published by i-D, NME and the BBC."
+  structuredData={personLd}
 >
   <h1 class="sr-only">James Kendall — Photographer & Writer, Brighton</h1>
   <!-- Full-bleed hero carousel — every project + commercial section, tagged and linked -->
@@ -58,6 +78,8 @@ for (let i = 0; i < maxLen; i++) {
             <img
               src={slide.image}
               alt={slide.title}
+              width={slide.width}
+              height={slide.height}
               loading={i === 0 ? 'eager' : 'lazy'}
               style={slide.focus ? `object-position: ${slide.focus}` : undefined}
             />

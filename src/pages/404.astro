@@ -1,0 +1,51 @@
+---
+/*
+  404 — wrangler.jsonc already declares not_found_handling: "404-page",
+  which expects dist/404.html; until this file existed, Cloudflare had
+  nothing to serve for it. Kept to the DS: mono tag row, display headline,
+  no decoration.
+*/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Tag from '../components/ds/Tag.astro';
+---
+
+<BaseLayout title="Page not found" description="This page doesn't exist or has moved." noindex={true}>
+  <section class="notfound page-pad">
+    <div class="tag-row">
+      <Tag tone="red">404</Tag>
+      <Tag tone="faded">NOT FOUND</Tag>
+    </div>
+    <h1>Nothing here</h1>
+    <p class="prose">
+      This page doesn't exist, or it has moved. Try
+      <a href="/projects">Projects</a>, <a href="/writing">Writing</a>, or head
+      <a href="/">back to the start</a>.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    padding-top: 36px;
+    padding-bottom: 56px;
+  }
+
+  .tag-row {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: 10px;
+  }
+
+  .prose {
+    margin-top: var(--space-5);
+  }
+
+  .prose a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .prose a:hover {
+    color: var(--signal-red);
+  }
+</style>

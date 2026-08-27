@@ -16,6 +16,10 @@ interface Props {
   description?: string;
   ogImage?: string;
   noindex?: boolean;
+  /* JSON-LD structured data (Person, Article, ...). Pages pass a plain
+     object; serialised into a script tag in <head>. Optional — most pages
+     don't need one. */
+  structuredData?: Record<string, unknown>;
 }
 
 const {
@@ -23,6 +27,7 @@ const {
   description = 'James Kendall — photographer and writer. Contemporary art practice, commercial photography, video, and music journalism.',
   ogImage = '/og-default.jpg',
   noindex = false,
+  structuredData,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
@@ -49,6 +54,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    {structuredData && (
+      <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    )}
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
