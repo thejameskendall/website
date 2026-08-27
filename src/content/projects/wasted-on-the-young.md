@@ -63,7 +63,7 @@ Read the essay [All Under One Roof Raving](/writing/all-under-one-roof-raving).
 
 <!--
 Image sequence goes here. Standard caption format:
-"Untitled, Wasted On The Young, 2022-2023, 29mm x 38mm, Giclée print on Canson High Gloss"
+"Untitled, Wasted On The Young, 2022-2023, 29cm x 38cm, Giclée print on Canson High Gloss"
 
 Exhibition view captions:
 "Exhibition View, Disclosive Group Show, CCA, Brighton"

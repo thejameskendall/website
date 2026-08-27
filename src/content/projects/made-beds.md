@@ -7,23 +7,23 @@ draft: true
 companionProject: unmade-beds
 images:
   - src: ../../assets/images/made-beds/1.webp
-    caption: Untitled 01, Made Beds, 2021–2022, 29mm x 38mm, Giclée print on Hahnemühle Photorag
+    caption: Untitled 01, Made Beds, 2021–2022, 29cm x 38cm, Giclée print on Hahnemühle Photorag
   - src: ../../assets/images/made-beds/2.webp
-    caption: Untitled 02, Made Beds, 2021–2022, 29mm x 38mm, Giclée print on Hahnemühle Photorag
+    caption: Untitled 02, Made Beds, 2021–2022, 29cm x 38cm, Giclée print on Hahnemühle Photorag
   - src: ../../assets/images/made-beds/3.webp
-    caption: Untitled 03, Made Beds, 2021–2022, 29mm x 38mm, Giclée print on Hahnemühle Photorag
+    caption: Untitled 03, Made Beds, 2021–2022, 29cm x 38cm, Giclée print on Hahnemühle Photorag
   - src: ../../assets/images/made-beds/4.webp
-    caption: Untitled 04, Made Beds, 2021–2022, 29mm x 38mm, Giclée print on Hahnemühle Photorag
+    caption: Untitled 04, Made Beds, 2021–2022, 29cm x 38cm, Giclée print on Hahnemühle Photorag
   - src: ../../assets/images/made-beds/5.webp
-    caption: Untitled 05, Made Beds, 2021–2022, 29mm x 38mm, Giclée print on Hahnemühle Photorag
+    caption: Untitled 05, Made Beds, 2021–2022, 29cm x 38cm, Giclée print on Hahnemühle Photorag
   - src: ../../assets/images/made-beds/6.webp
-    caption: Untitled 06, Made Beds, 2021–2022, 29mm x 38mm, Giclée print on Hahnemühle Photorag
+    caption: Untitled 06, Made Beds, 2021–2022, 29cm x 38cm, Giclée print on Hahnemühle Photorag
   - src: ../../assets/images/made-beds/7.webp
-    caption: Untitled 07, Made Beds, 2021–2022, 29mm x 38mm, Giclée print on Hahnemühle Photorag
+    caption: Untitled 07, Made Beds, 2021–2022, 29cm x 38cm, Giclée print on Hahnemühle Photorag
   - src: ../../assets/images/made-beds/8.webp
-    caption: Untitled 08, Made Beds, 2021–2022, 29mm x 38mm, Giclée print on Hahnemühle Photorag
+    caption: Untitled 08, Made Beds, 2021–2022, 29cm x 38cm, Giclée print on Hahnemühle Photorag
   - src: ../../assets/images/made-beds/9.webp
-    caption: Untitled 09, Made Beds, 2021–2022, 29mm x 38mm, Giclée print on Hahnemühle Photorag
+    caption: Untitled 09, Made Beds, 2021–2022, 29cm x 38cm, Giclée print on Hahnemühle Photorag
 ---
 
 Made Beds – a companion project to Unmade Beds – serves as a reflective exploration of humans' attempt to control and aestheticise nature, the noticeable dance both within city boundaries and the rural expanses.

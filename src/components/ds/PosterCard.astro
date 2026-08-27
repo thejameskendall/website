@@ -62,7 +62,12 @@ const { href, title, image, imageAlt = '', meta = [], overlap = true, bw = false
     line-height: var(--leading-display);
     text-transform: uppercase;
     color: var(--paper-1);
-    text-shadow: 0 0 24px rgba(22, 20, 18, 0.25);
+    /* Flat offset, not a blurred glow — the glow broke the DS's own "no
+       blur" rule (it was ported from the core design system rather than
+       built for this site). --shadow-paper is the same DS-approved flat
+       hard-offset token used for box-shadow elsewhere; text-shadow takes
+       the same offset/blur/colour syntax so it reuses cleanly. */
+    text-shadow: var(--shadow-paper);
     transition: color var(--duration-fast) var(--ease-out);
   }
 
