@@ -2,6 +2,10 @@
 
 Running log of what's done, what's next, decisions made. Updated each session.
 
+## Done — 23 August 2026 (dropdown toggle icon)
+
+- Swapped the `+`/`−` dropdown toggle for a chevron (`▾` closed, `▴` open). James asked whether `+` was good practice for a nav dropdown — it's not the strongest choice: plus/minus reads as "expand this accordion/FAQ in place" to most people, not "reveal a navigation menu". A chevron is the convention almost everyone has already learned from mega-menus elsewhere on the web. Same button, same click behaviour, just a clearer symbol. Build tested, confirmed in the bundled script.
+
 ## Done — 23 August 2026 (nav dropdowns, third fix — stuck open)
 
 - Title colour and panel design were both fixed, but James then found both dropdowns getting stuck open with no way to close them. Cause: this build already hit this exact bug once with the carousel/hero slides — author CSS setting `display` always beats the browser's own `[hidden] { display: none }`, regardless of specificity. The defensive `display: block` added to `.dropdown-panel` in the previous fix meant the JS's `panel.hidden = true` was still setting the attribute correctly, but the CSS no longer cared about it, so nothing ever actually hid. Scoped the rule to `.dropdown-panel:not([hidden])`, matching the pattern already used for `.carousel-slide` and `.hero-slide`. Build tested, confirmed `:not([hidden])` present in the bundled CSS.
