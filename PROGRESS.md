@@ -31,6 +31,12 @@ Running log of what's done, what's next, decisions made. Updated each session.
 - `PosterCard` title uses a soft blurred text-shadow (24px) for legibility over photos — technically against the DS's "no shadows except the flat offset token" rule, but ported from DS core, so presumed sanctioned. Confirm or swap for the flat token.
 - Instagram links (footer, About) show "↗" but open in the same tab — add `target="_blank"`, or drop the arrow?
 
+## Done — 27 August 2026 (Fable review follow-up)
+
+- James ran a Fable code review pass (commit `948065b`): verified the claims rather than taking the summary at face value — checked the actual diff on each fix and confirmed the crop bug fix against real pixel dimensions (Portraits image 7, a 1000x1250 portrait-orientation source, now builds at 1500x1875, same ratio, instead of being centre-cropped to 4:3). Everything checked out.
+- Answered Fable's three open questions and applied them: Made Beds/Unmade Beds print captions changed from `29mm x 38mm` to `29cm x 38cm` (mm was postage-stamp size); PosterCard's blurred title text-shadow swapped for the flat `--shadow-paper` token, in line with the DS's own no-blur rule; Instagram footer link now opens in a new tab (`target="_blank"`) to match the up-arrow glyph.
+- Still open: the two bigger calls (kill the nav dropdowns vs fix their ergonomics; drop the autoplaying hero and project carousel for static/scroll alternatives). James is coming back to those.
+
 ## Done — 23 August 2026 (dropdown toggle icon)
 
 - Swapped the `+`/`−` dropdown toggle for a chevron (`▾` closed, `▴` open). James asked whether `+` was good practice for a nav dropdown — it's not the strongest choice: plus/minus reads as "expand this accordion/FAQ in place" to most people, not "reveal a navigation menu". A chevron is the convention almost everyone has already learned from mega-menus elsewhere on the web. Same button, same click behaviour, just a clearer symbol. Build tested, confirmed in the bundled script.
