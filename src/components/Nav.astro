@@ -46,7 +46,7 @@ const links = [
           aria-expanded="false"
           aria-controls="dropdown-projects"
           aria-label="Show list of projects"
-        >+</button>
+        >▾</button>
         <ul id="dropdown-projects" class="dropdown-panel" hidden>
           {projects.map((p) => (
             <li>
@@ -72,7 +72,7 @@ const links = [
           aria-expanded="false"
           aria-controls="dropdown-commercial"
           aria-label="Show list of commercial categories"
-        >+</button>
+        >▾</button>
         <ul id="dropdown-commercial" class="dropdown-panel" hidden>
           {commercial.map((c) => (
             <li>
@@ -106,7 +106,7 @@ const links = [
       const toggle = item.querySelector<HTMLButtonElement>('.dropdown-toggle');
       const panel = item.querySelector<HTMLElement>('.dropdown-panel');
       toggle?.setAttribute('aria-expanded', 'false');
-      if (toggle) toggle.textContent = '+';
+      if (toggle) toggle.textContent = '▾';
       if (panel) panel.hidden = true;
     });
   }
@@ -116,7 +116,7 @@ const links = [
     const panel = item.querySelector<HTMLElement>('.dropdown-panel');
     closeAll(item);
     toggle?.setAttribute('aria-expanded', 'true');
-    if (toggle) toggle.textContent = '−';
+    if (toggle) toggle.textContent = '▴';
     if (panel) panel.hidden = false;
   }
 
@@ -124,7 +124,7 @@ const links = [
     const toggle = item.querySelector<HTMLButtonElement>('.dropdown-toggle');
     const panel = item.querySelector<HTMLElement>('.dropdown-panel');
     toggle?.setAttribute('aria-expanded', 'false');
-    if (toggle) toggle.textContent = '+';
+    if (toggle) toggle.textContent = '▾';
     if (panel) panel.hidden = true;
   }
 
